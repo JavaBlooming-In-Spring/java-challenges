@@ -1,3 +1,8 @@
-java-baseball-precourse/.idea/
-java-baseball-precourse/java-baseball-precourse.iml
-java-baseball-precourse/out/
+.gradle/
+.idea/
+build.gradle
+build/
+gradle/
+gradlew
+gradlew.bat
+settings.gradle

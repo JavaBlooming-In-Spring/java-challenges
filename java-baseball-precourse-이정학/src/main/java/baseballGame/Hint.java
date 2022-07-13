@@ -21,6 +21,10 @@ public class Hint {
     }
   }
 
+  public int getBallCount() {
+    return ballCount;
+  }
+
   public int getStrikeCount() {
     return strikeCount;
   }
