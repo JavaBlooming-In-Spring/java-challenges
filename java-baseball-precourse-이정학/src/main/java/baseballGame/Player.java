@@ -27,7 +27,7 @@ public class Player {
 
   private boolean checkValid(int inputNumber) {
     if (inputNumber < 0 || inputNumber > 9) {
-      System.out.println("잘못된 입력입니다.");
+      System.out.println("잘못된 입력입니다. 0 ~ 9 의 정수를 입력해 주세요.");
       return false;
     }
     return true;

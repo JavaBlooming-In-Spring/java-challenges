@@ -11,6 +11,7 @@ public class Main {
     Computer computer = new Computer();
     Hint hint = new Hint();
     do {
+      printStartMessage();
       computer.generateRandomNumbers();
       play(computer.getRandomNumbers());
     } while (playerWantRestart());
@@ -21,6 +22,7 @@ public class Main {
     Player player = new Player();
     while (true) {
       Hint hint = new Hint();
+      printInputRequestMessage();
       player.guessThreeNumbers(sc);
       hint.generateHint(randomNumbers, player.getGuessedThreeNumbers());
       hint.showHint();
@@ -29,6 +31,14 @@ public class Main {
         break;
       }
     }
+  }
+
+  private static void printStartMessage() {
+    System.out.println(("Game Start!!!"));
+  }
+
+  private static void printInputRequestMessage() {
+    System.out.println("0 에서 9까지의 숫자를 3개 입력해 주세요");
   }
 
   private static boolean isClearGame(int strikeCount) {
@@ -45,8 +55,12 @@ public class Main {
     } else if (answer.equals("no")) {
       return false;
     } else {
-      System.out.println("잘못된 입력으로 게임을 종료합니다.");
+      printInputErrorMessage();
       return false;
     }
+  }
+
+  private static void printInputErrorMessage() {
+    System.out.println("잘못된 입력으로 게임을 종료합니다.");
   }
 }
