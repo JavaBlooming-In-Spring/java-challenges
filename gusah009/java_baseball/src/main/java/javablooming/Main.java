@@ -84,7 +84,7 @@ public class Main {
   }
 
   private static void printCongratulationMessage() {
-    System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+    System.out.println(BALL_COUNT + "개의 숫자를 모두 맞히셨습니다! 게임 종료");
   }
 
   private static void printResultMessage(Hint result) {
@@ -139,7 +139,7 @@ public class Main {
   }
 
   private static void printInputGuideMessage() {
-    System.out.println("1~9 사이의 서로 다른 숫자 3개를 공백 없이 입력 해 주세요.");
+    System.out.println("1~9 사이의 서로 다른 숫자 " + BALL_COUNT + "개를 공백 없이 입력 해 주세요.");
   }
 
   static void initPlayerInputNumbersInvalidValues(int[] playerInputNumbers) {
