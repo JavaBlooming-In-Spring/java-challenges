@@ -45,24 +45,10 @@ public class Main {
   }
 
   static void initComputerNumbers(int[] computerNumbers) {
-    boolean[] isUsedNumber = new boolean[MAX_DIGIT_COUNT];
+    List<Integer> numberSet = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    Collections.shuffle(numberSet);
     for (int i = 0; i < BALL_COUNT; i++) {
-      int randomValue;
-      do {
-        long seed = System.currentTimeMillis();
-        randomValue = new Random(seed).nextInt(MAX_DIGIT_COUNT);
-      } while (randomValue == 0 || isUsedNumber[randomValue]);
-      isUsedNumber[randomValue] = true;
-    }
-    List<Integer> computerNumberList = new ArrayList<>();
-    for (int i = 0; i < MAX_DIGIT_COUNT; i++) {
-      if (isUsedNumber[i]) {
-        computerNumberList.add(i);
-      }
-    }
-    Collections.shuffle(computerNumberList);
-    for (int i = 0; i < computerNumberList.size(); i++) {
-      computerNumbers[i] = computerNumberList.get(i);
+      computerNumbers[i] = numberSet.get(i);
     }
   }
 
