@@ -3,6 +3,6 @@ import java.util.Scanner;
 public class GameUtils {
 
   public static final Scanner SCANNER = new Scanner(System.in);
-  public static final int MAX_LENGTH = 3;
+  public static final int TARGET_LENGTH = 4;
 
 }

@@ -2,51 +2,49 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class GameHelper {
   
   private String input;
+  private int[] inputResult = new int[GameUtils.TARGET_LENGTH];
   private int strike;
   private int ball;
 
   public void userInput() {
-    do {
-      System.out.print("예상하는 수를 입력해주세요 : ");
-      input = GameUtils.SCANNER.next();
-      GameUtils.SCANNER.nextLine();
-    } while(!verifyInput(input));
+    System.out.print("예상하는 수를 입력해주세요 : ");
+    input = GameUtils.SCANNER.next();
+    GameUtils.SCANNER.nextLine();
   }
 
-  private boolean verifyInput(String input) {
-    return isValidInputLength(input) && isNumericAndNotDuplicateInput(input);
+  public boolean isInvalidInput() {
+    return isInValidInputLength() || isNotNumericOrDuplicateInput();
   }
 
-  private boolean isValidInputLength(String input) {
-    if(input.length() != GameUtils.MAX_LENGTH) {
-      System.out.println("3자리 수를 입력해주세요.");
-      return false;
+  private boolean isInValidInputLength() {
+    if(input.length() != GameUtils.TARGET_LENGTH) {
+      System.out.println(GameUtils.TARGET_LENGTH + "자리 수를 입력해주세요.");
+      return true;
     }
-    return true;
+    return false;
   }
 
-  private boolean isNumericAndNotDuplicateInput(String input) {
+  private boolean isNotNumericOrDuplicateInput() {
     Set<Character> set = new HashSet<>();
     for(int i = 0; i < input.length(); i++) {
-      if (!isNumeric(input.charAt(i)) || isDuplicate(set, input.charAt(i))) {
-        return false;
+      if (isNotNumeric(input.charAt(i)) || isDuplicate(set, input.charAt(i))) {
+        return true;
       }
       set.add(input.charAt(i));
     }
-    return true;
+    return false;
   }
 
-  private boolean isNumeric(char target) {
+  private boolean isNotNumeric(char target) {
     if(Character.isDigit(target)) {
-      return true;
+      return false;
     }
     System.out.println("숫자만 입력해주세요.");
-    return false;
+    return true;
   }
 
   private boolean isDuplicate(Set<Character> set, char target) {
@@ -57,16 +55,18 @@ public class GameHelper {
     return false;
   }
 
-  public void compareInput(String target) {
-    Character[] characters = target.chars().mapToObj(s -> (char)s).toArray(Character[]::new);
-    List<Character> targets = Arrays.stream(characters).collect(Collectors.toList());
+  public void setInput() {
+    inputResult = Arrays.stream(input.split("")).mapToInt(Integer::parseInt).toArray();
+  }
+
+  public void compareInput(List<Integer> target) {
     strike = 0;
     ball = 0;
-    for(int i = 0; i < input.length(); i++) {
-      if(input.charAt(i) == targets.get(i)) {
+    for(int i = 0; i < GameUtils.TARGET_LENGTH; i++) {
+      if(inputResult[i] == target.get(i)) {
         strike += 1;
       } else {
-        if(targets.contains(input.charAt(i))) {
+        if(target.contains(inputResult[i])) {
           ball += 1;
         }
       }
@@ -74,7 +74,7 @@ public class GameHelper {
   }
 
   public boolean isNotGameOver() {
-    if(strike == 3) {
+    if(strike == GameUtils.TARGET_LENGTH) {
       System.out.println("정답!");
       return false;
     }

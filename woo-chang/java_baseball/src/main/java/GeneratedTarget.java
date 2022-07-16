@@ -1,17 +1,24 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GeneratedTarget {
 
-  private final String target;
-  private final Integer[] nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+  private final List<Integer> target = new ArrayList<Integer>();
+  private final int[] nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
   public GeneratedTarget() {
-    this.target = generateRandomTarget();
+    shuffleNums();
+    for(int i = 0; i < GameUtils.TARGET_LENGTH; i++) {
+      target.add(nums[i]);
+    }
   }
 
-  private String generateRandomTarget() {
+  public void generatedNewTarget() {
     shuffleNums();
-    return nums[0] + String.valueOf(nums[1]) + nums[2];
+    for(int i = 0; i < GameUtils.TARGET_LENGTH; i++) {
+      target.set(i, nums[i]);
+    }
   }
 
   private void shuffleNums() {
@@ -24,7 +31,7 @@ public class GeneratedTarget {
     }
   }
 
-  public String getTarget() {
+  public List<Integer> getTarget() {
     return this.target;
   }
 
