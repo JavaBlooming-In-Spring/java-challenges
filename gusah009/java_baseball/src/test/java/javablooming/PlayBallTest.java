@@ -5,15 +5,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class MainTest {
+class PlayBallTest {
 
   @Test
   void initComputerNumbers() {
     //given
-    int[] computerNumbers = {-1, -1, -1};
+    int[] computerNumbers;
 
     //when
-    Main.initComputerNumbers(computerNumbers);
+    computerNumbers = PlayBall.getRandomNumbers();
 
     //then
     checkElementInRange(computerNumbers);
@@ -40,9 +40,10 @@ class MainTest {
   void isAllStrike() {
     //given
     Hint allStrikeHint = Hint.getAllStrike();
+    PlayBall playBall = PlayBall.startGame();
 
     //when
-    boolean notAllStrike = Main.isNotAllStrike(allStrikeHint);
+    boolean notAllStrike = playBall.isNotAllStrike(allStrikeHint);
 
     //then
     assertThat(notAllStrike).isFalse();
@@ -52,9 +53,10 @@ class MainTest {
   void isNotAllStrike() {
     //given
     Hint notAllStrikeHint = Hint.getHint(new int[]{1, 2, 3}, new int[]{1, 2, 4});
+    PlayBall playBall = PlayBall.startGame();
 
     //when
-    boolean notAllStrike = Main.isNotAllStrike(notAllStrikeHint);
+    boolean notAllStrike = playBall.isNotAllStrike(notAllStrikeHint);
 
     //then
     assertThat(notAllStrike).isTrue();
@@ -63,24 +65,25 @@ class MainTest {
   @Test
   void initPlayerInputNumbersInvalidValues() {
     //given
-    int[] playerInputNumbers = {4, 5, 7};
+    PlayBall playBall = PlayBall.startGame();
 
     //when
-    Main.initPlayerInputNumbersInvalidValues(playerInputNumbers);
+    playBall.initPlayerInputNumbersInvalidValues();
 
     //then
-    assertThat(playerInputNumbers[0]).isEqualTo(INVALID_VALUE);
-    assertThat(playerInputNumbers[1]).isEqualTo(INVALID_VALUE);
-    assertThat(playerInputNumbers[2]).isEqualTo(INVALID_VALUE);
+    assertThat(playBall.playerInputNumbers[0]).isEqualTo(INVALID_VALUE);
+    assertThat(playBall.playerInputNumbers[1]).isEqualTo(INVALID_VALUE);
+    assertThat(playBall.playerInputNumbers[2]).isEqualTo(INVALID_VALUE);
   }
 
   @Test
   void isAnyDigitEqualsZero() {
     //given
     int playerInputNumber = 250;
+    PlayBall playBall = PlayBall.startGame();
 
     //when
-    boolean anyDigitEqualsZero = Main.isAnyDigitEqualsZero(playerInputNumber);
+    boolean anyDigitEqualsZero = playBall.isAnyDigitEqualsZero(playerInputNumber);
 
     //then
     assertThat(anyDigitEqualsZero).isTrue();
@@ -90,9 +93,10 @@ class MainTest {
   void hasDuplicateElement() {
     //given
     int playerInputNumber = 224;
+    PlayBall playBall = PlayBall.startGame();
 
     //when
-    boolean hasDuplicateElement = Main.hasDuplicateElement(playerInputNumber);
+    boolean hasDuplicateElement = playBall.hasDuplicateElement(playerInputNumber);
 
     //then
     assertThat(hasDuplicateElement).isTrue();
@@ -102,9 +106,10 @@ class MainTest {
   void isInvalidRange() {
     //given
     int playerInputNumber = 1234;
+    PlayBall playBall = PlayBall.startGame();
 
     //when
-    boolean invalidRange = Main.isInvalidRange(playerInputNumber);
+    boolean invalidRange = playBall.isInvalidRange(playerInputNumber);
 
     //then
     assertThat(invalidRange).isTrue();
