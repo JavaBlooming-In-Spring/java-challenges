@@ -6,6 +6,7 @@ public class Main {
       playBall.start();
       playBall.chooseGameStart();
     } while(playBall.isNotStop());
+    GameUtils.SCANNER.close();
   }
 
 }
