@@ -10,7 +10,7 @@ public class Main {
       GameManager.play();
       GameManager.printClearGameMessage();
       GameManager.printRestartGuideMessage();
-    } while (GameManager.playerWantRestart());
+    } while (GameManager.doesPlayerWantRestart());
 
     GameManager.printEndGameMessage();
     SCANNER.close();

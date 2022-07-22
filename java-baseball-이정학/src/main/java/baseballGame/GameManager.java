@@ -18,7 +18,7 @@ public class GameManager {
   public static void play() {
     Computer computer = new Computer();
     int strikeCount = 0;
-    int[] randomNumbers = computer.getRandomNumbers();
+    int[] randomNumbers = computer.getNumbers();
     do {
       printInputRequestMessage();
       int[] guessedNumbers = guessNumbers();
@@ -28,20 +28,27 @@ public class GameManager {
     } while (isNotClear(strikeCount));
   }
 
-  public static boolean playerWantRestart() {
+  public static boolean doesPlayerWantRestart() {
     GameStatus playerStatus = getPlayerStatus();
     return RESTART.equals(playerStatus);
   }
 
-  public static int[] guessNumbers() {
+  private static int[] guessNumbers() {
     int inputNumber = playerInput();
+    checkValidInputNumber(inputNumber);
     int[] numbers = changeInputNumberToArray(inputNumber);
-    checkValidInput(inputNumber, numbers);
+    checkValidInputNumbers(numbers);
     return numbers;
   }
 
-  private static void checkValidInput(int inputNumber, int[] numbers) {
-    if (isInvalidLength(inputNumber) || isNotValidInputNumber(numbers)) {
+  private static void checkValidInputNumber(int inputNumber) {
+    if (isInvalidLength(inputNumber)) {
+      throw new IllegalArgumentException();
+    }
+  }
+
+  private static void checkValidInputNumbers(int[] inputNumbers) {
+    if (isInValidInputNumbers(inputNumbers)) {
       throw new IllegalArgumentException();
     }
   }
@@ -59,7 +66,7 @@ public class GameManager {
     return SCANNER.nextInt();
   }
 
-  private static boolean isNotValidInputNumber(int[] inputNumbers) {
+  private static boolean isInValidInputNumbers(int[] inputNumbers) {
     if (hasAnyZero(inputNumbers)) {
       return true;
     }
@@ -84,6 +91,7 @@ public class GameManager {
     }
     return false;
   }
+
   private static GameStatus getPlayerStatus() {
     int playerStatus = SCANNER.nextInt();
     if (RESTART.getStatus() == playerStatus) {
