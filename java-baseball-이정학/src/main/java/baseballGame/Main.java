@@ -1,66 +1,18 @@
 package baseballGame;
 
-import java.util.Scanner;
+import static baseballGame.GameUtils.SCANNER;
 
 public class Main {
 
-  public static int BALL_COUNT = 3;
-  private static final Scanner sc = new Scanner(System.in);
-
   public static void main(String[] args) {
-    Computer computer = new Computer();
-    Hint hint = new Hint();
     do {
-      printStartMessage();
-      computer.generateRandomNumbers();
-      play(computer.getRandomNumbers());
-    } while (playerWantRestart());
-    sc.close();
-  }
+      GameManager.printStartGameMessage();
+      GameManager.play();
+      GameManager.printClearGameMessage();
+      GameManager.printRestartGuideMessage();
+    } while (GameManager.playerWantRestart());
 
-  public static void play(int[] randomNumbers) {
-    Player player = new Player();
-    while (true) {
-      Hint hint = new Hint();
-      printInputRequestMessage();
-      player.guessThreeNumbers(sc);
-      hint.generateHint(randomNumbers, player.getGuessedThreeNumbers());
-      hint.showHint();
-      if (isClearGame(hint.getStrikeCount())) {
-        System.out.println("Game Clear!!!!");
-        break;
-      }
-    }
-  }
-
-  private static void printStartMessage() {
-    System.out.println(("Game Start!!!"));
-  }
-
-  private static void printInputRequestMessage() {
-    System.out.println("0 에서 9까지의 숫자를 3개 입력해 주세요");
-  }
-
-  private static boolean isClearGame(int strikeCount) {
-    return strikeCount == BALL_COUNT;
-  }
-
-  private static boolean playerWantRestart() {
-    System.out.println("게임을 다시 하고 싶으시면 yes 아니면 no를 입력해 주세요");
-    sc.nextLine();
-    String answer = sc.nextLine();
-    System.out.println("answer = " + answer);
-    if (answer.equals("yes")) {
-      return true;
-    } else if (answer.equals("no")) {
-      return false;
-    } else {
-      printInputErrorMessage();
-      return false;
-    }
-  }
-
-  private static void printInputErrorMessage() {
-    System.out.println("잘못된 입력으로 게임을 종료합니다.");
+    GameManager.printEndGameMessage();
+    SCANNER.close();
   }
 }
