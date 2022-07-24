@@ -9,6 +9,7 @@ import static javablooming.util.GameUtil.SCANNER;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 import javablooming.domain.Car;
 import javablooming.util.GameUtil.InputStatus;
 import javablooming.util.GameUtil.RacingResult;
@@ -140,18 +141,18 @@ public class GamePlay {
   }
 
   List<Car> getFirstCarList() {
-    List<Car> firstCarList = new ArrayList<>();
-    for (Car playerCar : playerCars) {
-      if (firstCarList.isEmpty()) {
-        firstCarList.add(playerCar);
-      } else if (firstCarList.get(0).getPosition() < playerCar.getPosition()) {
-        firstCarList.clear();
-        firstCarList.add(playerCar);
-      } else if (firstCarList.get(0).getPosition() == playerCar.getPosition()) {
-        firstCarList.add(playerCar);
-      }
-    }
-    return firstCarList;
+    int maxPosition = getMaxPosition(playerCars);
+    return playerCars.stream()
+        .filter(playerCar -> playerCar.getPosition() == maxPosition)
+        .toList();
+  }
+
+  private int getMaxPosition(List<Car> playerCars) {
+    int max = playerCars.stream()
+        .mapToInt(Car::getPosition)
+        .max()
+        .getAsInt();
+    return max;
   }
 
   List<String> castCarNameList(List<Car> firstCarList) {
