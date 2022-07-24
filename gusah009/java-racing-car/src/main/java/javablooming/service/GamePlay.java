@@ -105,8 +105,7 @@ public class GamePlay {
 
   private String getPositionToDash(Car playerCar) {
     // position의 크기만큼 대쉬("-") 생성
-    return new String(new char[playerCar.getPosition()])
-        .replace("\0", "-");
+    return "-".repeat(playerCar.getPosition());
   }
 
   private void playEachRacing() {
