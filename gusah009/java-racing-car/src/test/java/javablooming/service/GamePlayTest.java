@@ -126,7 +126,7 @@ class GamePlayTest {
     RacingResult result = game.getRacingResult(1);
 
     // then
-    assertThat(result).isEqualTo(FORWARD);
+    assertThat(result).isEqualTo(STAY);
   }
 
   @Test
@@ -138,7 +138,7 @@ class GamePlayTest {
     RacingResult result = game.getRacingResult(2);
 
     // then
-    assertThat(result).isEqualTo(FORWARD);
+    assertThat(result).isEqualTo(STAY);
   }
 
   @Test
@@ -150,7 +150,7 @@ class GamePlayTest {
     RacingResult result = game.getRacingResult(3);
 
     // then
-    assertThat(result).isEqualTo(FORWARD);
+    assertThat(result).isEqualTo(STAY);
   }
 
   @Test
@@ -162,7 +162,7 @@ class GamePlayTest {
     RacingResult result = game.getRacingResult(4);
 
     // then
-    assertThat(result).isEqualTo(STAY);
+    assertThat(result).isEqualTo(FORWARD);
   }
 
   @Test
@@ -174,7 +174,7 @@ class GamePlayTest {
     RacingResult result = game.getRacingResult(5);
 
     // then
-    assertThat(result).isEqualTo(STAY);
+    assertThat(result).isEqualTo(FORWARD);
   }
 
   @Test
@@ -186,7 +186,7 @@ class GamePlayTest {
     RacingResult result = game.getRacingResult(9);
 
     // then
-    assertThat(result).isEqualTo(STAY);
+    assertThat(result).isEqualTo(FORWARD);
   }
 
   private void setSystemInput(String data) {
