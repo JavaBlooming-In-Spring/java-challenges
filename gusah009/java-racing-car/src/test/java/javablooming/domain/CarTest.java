@@ -16,7 +16,7 @@ class CarTest {
     boolean carNameValid = isCarNameValid(carName);
 
     //then
-    assertThat(carNameValid).isEqualTo(true);
+    assertThat(carNameValid).isEqualTo(false);
   }
 
   @Test

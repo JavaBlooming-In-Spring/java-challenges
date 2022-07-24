@@ -25,20 +25,20 @@ public class GamePlay {
   }
 
   public void input() {
+    printGuideMessage("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
     while (tryInputCarNames() == FAIL)
       ;
+    printGuideMessage("시도할 횟수는 몇회인가요?");
     while (tryInputMoveCount() == FAIL)
       ;
   }
 
   InputStatus tryInputCarNames() {
     try {
-      printGuideMessage("자동차 이름은 쉼표(,)를 기준으로 구분하며 이름은 5자 이하만 가능합니다.");
-      printGuideMessage("예시) jhm,cwc,ljh,shk");
       String playerInput = getPlayerInput();
       setPlayerCars(playerInput);
     } catch (Exception e) {
-      e.printStackTrace();
+      playerCars.clear();
       printErrorMessage();
       return FAIL;
     }
@@ -70,11 +70,9 @@ public class GamePlay {
 
   InputStatus tryInputMoveCount() {
     try {
-      printGuideMessage("시도할 횟수는 몇회인가요?");
       String playerInput = getPlayerInput();
       setMoveCount(playerInput);
     } catch (Exception e) {
-      e.printStackTrace();
       printErrorMessage();
       return FAIL;
     }
