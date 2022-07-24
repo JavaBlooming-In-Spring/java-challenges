@@ -123,9 +123,9 @@ public class GamePlay {
 
   RacingResult getRacingResult(int randomNum) {
     if (randomNum <= 3) {
-      return FORWARD;
+      return STAY;
     }
-    return STAY;
+    return FORWARD;
   }
 
   public void printResult() {
