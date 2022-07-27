@@ -1,5 +1,8 @@
 package com.woochang.racingcar;
 
+import com.woochang.racingcar.domain.User;
+import com.woochang.racingcar.game.GameHelper;
+
 public class Main {
 
   public static void main(String[] args) {

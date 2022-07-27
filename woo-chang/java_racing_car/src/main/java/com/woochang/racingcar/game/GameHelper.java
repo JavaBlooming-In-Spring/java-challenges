@@ -1,5 +1,8 @@
-package com.woochang.racingcar;
+package com.woochang.racingcar.game;
 
+import com.woochang.racingcar.RandomSystem;
+import com.woochang.racingcar.domain.Car;
+import com.woochang.racingcar.domain.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +27,7 @@ public class GameHelper {
     do {
       input = GameInput.nextLine();
       carNames = GameInput.parseCars(input);
-    } while(!(GameValidation.verifyCars(carNames)));
+    } while(!(GameValidation.verifyCarNames(carNames)));
     return carNames;
   }
 

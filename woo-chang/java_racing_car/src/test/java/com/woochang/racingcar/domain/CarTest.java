@@ -1,4 +1,4 @@
-package com.woochang.racingcar;
+package com.woochang.racingcar.domain;
 
 import static org.assertj.core.api.Assertions.*;
 

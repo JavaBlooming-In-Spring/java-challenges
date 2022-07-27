@@ -1,5 +1,6 @@
-package com.woochang.racingcar;
+package com.woochang.racingcar.game;
 
+import com.woochang.racingcar.domain.Car;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,7 +1,8 @@
-package com.woochang.racingcar;
+package com.woochang.racingcar.game;
 
 import static org.assertj.core.api.Assertions.*;
 
+import com.woochang.racingcar.game.GameInput;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

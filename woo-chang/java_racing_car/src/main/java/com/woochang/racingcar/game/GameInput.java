@@ -1,4 +1,4 @@
-package com.woochang.racingcar;
+package com.woochang.racingcar.game;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.woochang.racingcar;
+package com.woochang.racingcar.game;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,10 +13,10 @@ public class GameValidationTest {
   public void inputInvalidLessCarName() {
     //given
     String input = "pobi,crong,,honux";
-    List<String> cars = GameInput.parseCars(input);
+    List<String> carNames = GameInput.parseCars(input);
 
     //when
-    boolean result = GameValidation.verifyCars(cars);
+    boolean result = GameValidation.verifyCarNames(carNames);
 
     //then
     assertThat(result).isEqualTo(false);
@@ -27,10 +27,10 @@ public class GameValidationTest {
   public void inputInvalidOverCarName() {
     //given
     String input = "pobi,crong,honux,woowahanpobi";
-    List<String> cars = GameInput.parseCars(input);
+    List<String> carNames = GameInput.parseCars(input);
 
     //when
-    boolean result = GameValidation.verifyCars(cars);
+    boolean result = GameValidation.verifyCarNames(carNames);
 
     //then
     assertThat(result).isEqualTo(false);
@@ -41,10 +41,10 @@ public class GameValidationTest {
   public void inputValidCarName() {
     //given
     String input = "pobi,crong,honux";
-    List<String> cars = GameInput.parseCars(input);
+    List<String> carNames = GameInput.parseCars(input);
 
     //when
-    boolean result = GameValidation.verifyCars(cars);
+    boolean result = GameValidation.verifyCarNames(carNames);
 
     //then
     assertThat(result).isEqualTo(true);
