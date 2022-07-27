@@ -7,42 +7,42 @@ import java.util.Scanner;
 public class Player {
     Scanner sc = new Scanner(System.in);
     Error error = new Error();
-    List<Integer> playersNum = new ArrayList<>();
+    List<Integer> playersNumber = new ArrayList<>();
 
     public void inputControl(){
-        String inputStr = playersInput();
-        String[] inputArr = splitString(inputStr);
-        error.validateLengthError(inputArr);
+        String inputString = playersInput();
+        String[] inputArray = splitString(inputString);
+        error.validateLength(inputArray);
         clearList();
-        generatePlayersList(inputArr);
-        error.validateNumValueError(playersNum);
-        error.validateDupNumError(playersNum);
+        generatePlayersList(inputArray);
+        error.validateNumberValue(playersNumber);
+        error.validateDupicateNumber(playersNumber);
     }
     private String playersInput(){
-        String str = sc.nextLine();
-        return str;
+        String string = sc.nextLine();
+        return string;
     }
-    private String[] splitString(String str){
-        String[] inputArr = str.split(" ");
-        return inputArr;
+    private String[] splitString(String string){
+        String[] inputArray = string.split(" ");
+        return inputArray;
     }
     private void clearList(){
-        if (playersNum.size() == Constant.LIST_SIZE)
-            playersNum.clear();
+        if (playersNumber.size() == Constant.LIST_SIZE)
+            playersNumber.clear();
     }
-    private void generatePlayersList(String[] inputArr){
+    private void generatePlayersList(String[] inputArray){
         for (int i =0 ;i < Constant.LIST_SIZE; i++){
-            playersNum.add(Integer.parseInt(inputArr[i]));
+            playersNumber.add(Integer.parseInt(inputArray[i]));
         }
     }
     public int restartAnswer(){
-        String inputStr = playersInput();
-        int restartSignal = stringToInt(inputStr);
-        error.validateRestartError(restartSignal);
+        String inputString = playersInput();
+        int restartSignal = stringToInt(inputString);
+        error.validateRestart(restartSignal);
         return restartSignal;
     }
-    private int stringToInt(String inputStr){
-        int num = Integer.parseInt(inputStr);
-        return num;
+    private int stringToInt(String inputString){
+        int number = Integer.parseInt(inputString);
+        return number;
     }
 }

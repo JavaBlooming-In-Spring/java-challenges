@@ -17,7 +17,7 @@ public class Game {
     }
     private void play(){
         do{
-            computer.askNum();
+            computer.askNumber();
             player.inputControl();
             gameController.countScore();
             gameController.printScore();

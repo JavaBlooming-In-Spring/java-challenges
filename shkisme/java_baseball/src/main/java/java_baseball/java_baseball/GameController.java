@@ -2,14 +2,9 @@ package java_baseball.java_baseball;
 
 import java.util.List;
 
+import static java_baseball.java_baseball.GameController.GameControllerMessage.*;
 import static java_baseball.java_baseball.RestartStatus.RESTART;
 
-class GameControllerMessage {
-    public static final String BALL_STRING = "볼 ";
-    public static final String STRIKE_STRING = "스트라이크 ";
-    public static final String NOTHING = "낫싱";
-    public static final String ALL_CORRECT = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
-}
 
 public class GameController {
     private int strike;
@@ -22,43 +17,43 @@ public class GameController {
         this.computer = computer;
     }
     public void countScore(){
-        saveStrikeCount(countStrike(player.playersNum));
-        saveBallCount(countBall(player.playersNum));
+        saveStrikeCount(countStrike(player.playersNumber));
+        saveBallCount(countBall(player.playersNumber));
     }
     private int countStrike(List<Integer> playersNum){
-        int cnt =0;
+        int count =0;
         for (int i= 0; i< Constant.LIST_SIZE; i++){
-            if (playersNum.get(i).equals(computer.getRandomNumList().get(i)))
-                cnt += 1;
+            if (playersNum.get(i).equals(computer.getRandomNumberList().get(i)))
+                count += 1;
         }
-        return cnt;
+        return count;
     }
     private int countBall(List<Integer> playersNum){
-        int cnt = 0;
+        int count = 0;
         for (int i =0 ;i < Constant.LIST_SIZE; i++){
-            if (computer.getRandomNumList().contains(playersNum.get(i)) && !(playersNum.get(i).equals(computer.getRandomNumList().get(i))))
-                cnt+=1;
+            if (computer.getRandomNumberList().contains(playersNum.get(i)) && !(playersNum.get(i).equals(computer.getRandomNumberList().get(i))))
+                count+=1;
         }
-        return cnt;
+        return count;
     }
-    private void saveStrikeCount(int countNum){
-        this.strike = countNum;
+    private void saveStrikeCount(int countNumber){
+        this.strike = countNumber;
     }
-    private void saveBallCount(int countNum){
-        this.ball = countNum;
+    private void saveBallCount(int countNumber){
+        this.ball = countNumber;
     }
     public void printScore(){
         if (ball >0 && strike > 0){
-            System.out.println(ball + GameControllerMessage.BALL_STRING + strike + GameControllerMessage.STRIKE_STRING);
+            System.out.println(ball + BALL_STRING.getMessage() + strike + STRIKE_STRING.getMessage());
         }
         else if (ball > 0){
-            System.out.println(ball + GameControllerMessage.BALL_STRING);
+            System.out.println(ball + BALL_STRING.getMessage());
         }
         else if (strike > 0){
-            System.out.println(strike + GameControllerMessage.STRIKE_STRING);
+            System.out.println(strike + STRIKE_STRING.getMessage());
         }
         else{
-            System.out.println(GameControllerMessage.NOTHING);
+            System.out.println(NOTHING.getMessage());
         }
     }
     public boolean isGameEnd(){
@@ -76,7 +71,7 @@ public class GameController {
         judgeGameRestart(player.restartAnswer());
     }
     void gameClearMessage(){
-        System.out.println(GameControllerMessage.ALL_CORRECT);
+        System.out.println(ALL_CORRECT.getMessage());
     }
     private void judgeGameRestart(int playersAnswer){
         if (playersAnswer == RESTART.getRestartStatus()){
@@ -94,5 +89,19 @@ public class GameController {
     }
     public boolean getRestartState(){
         return restartState;
+    }
+    enum GameControllerMessage {
+        BALL_STRING ("볼 "),
+        STRIKE_STRING ("스트라이크 "),
+        NOTHING ("낫싱"),
+        ALL_CORRECT ("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
+
+        private String message;
+        GameControllerMessage(String message){
+            this.message = message;
+        }
+        public String getMessage(){
+            return this.message;
+        }
     }
 }
