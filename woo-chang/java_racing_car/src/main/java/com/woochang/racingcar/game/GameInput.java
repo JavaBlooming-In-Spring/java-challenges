@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class GameInput {
 
-  private static final Scanner scanner = new Scanner(System.in);
+  public static Scanner scanner = new Scanner(System.in);
 
   public static String nextLine() {
     return scanner.nextLine();

@@ -15,7 +15,7 @@ public class GameHelper {
     user.setCount(count);
   }
 
-  private static List<Car> generateCars() {
+  static List<Car> generateCars() {
     GameOutput.printForCarsName();
     List<String> carsNames = getCarsName();
     return carsNames.stream().map(Car::new).collect(Collectors.toList());
@@ -32,7 +32,7 @@ public class GameHelper {
   }
 
 
-  private static int generateCount() {
+  static int generateCount() {
     GameOutput.printForCount();
     return getCount();
   }
@@ -68,9 +68,13 @@ public class GameHelper {
 
   public static void gameEnd(List<Car> cars) {
     int maxPosition = getMaxPosition(cars);
-    List<Car> result = cars.stream().filter(car -> car.getPosition() == maxPosition).collect(Collectors.toList());
+    List<Car> result = getWinners(cars, maxPosition);
     GameOutput.printForResult(result);
     GameInput.close();
+  }
+
+  static List<Car> getWinners(List<Car> cars, int maxPosition) {
+    return cars.stream().filter(car -> car.getPosition() == maxPosition).collect(Collectors.toList());
   }
 
   private static int getMaxPosition(List<Car> cars) {
