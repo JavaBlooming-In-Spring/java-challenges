@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class GameUtil {
 
-  public static final Scanner SCANNER = new Scanner(System.in);
+  public static Scanner SCANNER = new Scanner(System.in);
 
   public enum InputStatus {
     SUCCEED(true), FAIL(false);

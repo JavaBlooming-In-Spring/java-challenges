@@ -4,10 +4,12 @@ import static javablooming.util.GameUtil.InputStatus.FAIL;
 import static javablooming.util.GameUtil.InputStatus.SUCCEED;
 import static javablooming.util.GameUtil.RacingResult.FORWARD;
 import static javablooming.util.GameUtil.RacingResult.STAY;
+import static javablooming.util.GameUtil.SCANNER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
+import java.util.Scanner;
 import javablooming.domain.Car;
 import javablooming.util.GameUtil.InputStatus;
 import javablooming.util.GameUtil.RacingResult;
@@ -30,10 +32,23 @@ class GamePlayTest {
   }
 
   @Test
-  void tryInputMoveCountInValid() {
+  void tryInputMoveCountInValidByNotNumber() {
     // given
     GamePlay game = new GamePlay();
     setSystemInput("abc");
+
+    // when
+    InputStatus result = game.tryInputMoveCount();
+
+    // then
+    assertThat(result).isEqualTo(FAIL);
+  }
+
+  @Test
+  void tryInputMoveCountInValidByNegative() {
+    // given
+    GamePlay game = new GamePlay();
+    setSystemInput("-5");
 
     // when
     InputStatus result = game.tryInputMoveCount();
@@ -190,6 +205,8 @@ class GamePlayTest {
   }
 
   private void setSystemInput(String data) {
-    System.setIn(new ByteArrayInputStream(data.getBytes()));
+    ByteArrayInputStream userInputStream = new ByteArrayInputStream(data.getBytes());
+    SCANNER = new Scanner(userInputStream);
+    System.setIn(userInputStream);
   }
 }

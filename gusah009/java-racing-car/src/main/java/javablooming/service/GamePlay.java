@@ -81,7 +81,7 @@ public class GamePlay {
   }
 
   private void setMoveCount(String playerInput) {
-    moveCount = Integer.parseInt(playerInput);
+    moveCount = Integer.parseUnsignedInt(playerInput);
   }
 
   public void play() {
