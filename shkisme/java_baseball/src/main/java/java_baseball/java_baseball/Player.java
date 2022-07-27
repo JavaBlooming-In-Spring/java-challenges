@@ -7,25 +7,42 @@ import java.util.Scanner;
 public class Player {
     Scanner sc = new Scanner(System.in);
     Error error = new Error();
-    public List<Integer> inputNum(){
-        List<Integer> playersNum = new ArrayList<>();
-        String str = sc.nextLine();
-        String[] inputArr = str.split(" ");
+    List<Integer> playersNum = new ArrayList<>();
 
+    public void inputControl(){
+        String inputStr = playersInput();
+        String[] inputArr = splitString(inputStr);
         error.validateLengthError(inputArr);
-
-        playersNum.add(Integer.parseInt(inputArr[0]));
-        playersNum.add(Integer.parseInt(inputArr[1]));
-        playersNum.add(Integer.parseInt(inputArr[2]));
-
+        clearList();
+        generatePlayersList(inputArr);
         error.validateNumValueError(playersNum);
         error.validateDupNumError(playersNum);
-        return playersNum;
+    }
+    private String playersInput(){
+        String str = sc.nextLine();
+        return str;
+    }
+    private String[] splitString(String str){
+        String[] inputArr = str.split(" ");
+        return inputArr;
+    }
+    private void clearList(){
+        if (playersNum.size() == Constant.LIST_SIZE)
+            playersNum.clear();
+    }
+    private void generatePlayersList(String[] inputArr){
+        for (int i =0 ;i < Constant.LIST_SIZE; i++){
+            playersNum.add(Integer.parseInt(inputArr[i]));
+        }
     }
     public int restartAnswer(){
-        String str = sc.nextLine();
-        int restartSignal = Integer.parseInt(str);
+        String inputStr = playersInput();
+        int restartSignal = stringToInt(inputStr);
         error.validateRestartError(restartSignal);
         return restartSignal;
+    }
+    private int stringToInt(String inputStr){
+        int num = Integer.parseInt(inputStr);
+        return num;
     }
 }

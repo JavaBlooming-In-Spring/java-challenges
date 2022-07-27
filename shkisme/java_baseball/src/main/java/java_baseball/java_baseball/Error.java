@@ -1,31 +1,48 @@
 package java_baseball.java_baseball;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import static java_baseball.java_baseball.RestartStatus.END;
+import static java_baseball.java_baseball.RestartStatus.RESTART;
+
+class ErrorMessage {
+    public static final String LENGTH_ERROR = "숫자 3개를 입력해 주세요.";
+    public static final String VALUE_ERROR = "1부터 9 사이의 숫자를 입력해 주세요.";
+    public static final String DUPNUM_ERROR = "숫자를 중복 없이 입력해 주세요.";
+    public static final String RESTART_ERROR = "숫자 1 또는 2를 입력해 주세요.";
+}
 public class Error {
     public void validateLengthError(String[] inputArr){
         if (inputArr.length != Constant.LIST_SIZE){
-            throw new IllegalArgumentException(Constant.LENGTH_ERROR);
+            throw new IllegalArgumentException(ErrorMessage.LENGTH_ERROR);
         }
     }
     public void validateNumValueError(List<Integer> playersNum){
         for (int i= 0; i< Constant.LIST_SIZE;i++){
-            if (!(1<=playersNum.get(i) && playersNum.get(i) <= 9)){
-                throw new IllegalArgumentException(Constant.VALUE_ERROR);
+            if (isValueError(playersNum.get(i))){
+                throw new IllegalArgumentException(ErrorMessage.VALUE_ERROR);
             }
         }
     }
+    private boolean isValueError(int num){
+        if (Constant.BALL_MIN<=num && num <= Constant.BALL_MAX){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
     public void validateDupNumError(List<Integer> playersNum){
-        int num1 = playersNum.get(Constant.FIRST_INDEX);
-        int num2 = playersNum.get(Constant.SECOND_INDEX);
-        int num3 = playersNum.get(Constant.THIRD_INDEX);
-        if (num1 == num2 || num1==num3 || num2 == num3){
-            throw new IllegalArgumentException(Constant.DUPNUM_ERROR);
+        HashSet<Integer> set = new HashSet<>(playersNum);
+        if (!(set.size() == Constant.LIST_SIZE)){
+            throw new IllegalArgumentException(ErrorMessage.DUPNUM_ERROR);
         }
     }
     public void validateRestartError(int restartSignal){
-        if (restartSignal != 1 && restartSignal != 2){
-            throw new IllegalArgumentException(Constant.RESTART_ERROR);
+        if (restartSignal != RESTART.getRestartStatus() && restartSignal != END.getRestartStatus()){
+            throw new IllegalArgumentException(ErrorMessage.RESTART_ERROR);
         }
     }
 }

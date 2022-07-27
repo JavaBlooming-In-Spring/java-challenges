@@ -3,23 +3,24 @@ package java_baseball.java_baseball;
 public class Game {
     Player player;
     Computer computer;
+    GameController gameController;
     Game(){
         this.computer = new Computer();
         this.player = new Player();
+        this.gameController = new GameController(player,computer);
     }
     public void gameStart(){
         do{
+            computer.generateRandomNum();
             play();
-        } while(computer.getRestartState());
+        } while(gameController.getRestartState());
     }
     private void play(){
-        computer.generateRandomNum();
         do{
             computer.askNum();
-            computer.gameStateSet();
-            computer.compareNum(player.inputNum());
-            computer.printScore();
-            computer.isGameEnd(player);
-        }while (computer.getGameState());
+            player.inputControl();
+            gameController.countScore();
+            gameController.printScore();
+        }while (gameController.isGameEnd());
     }
 }
