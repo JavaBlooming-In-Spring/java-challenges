@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 public class GamePlayTest {
 
   @Test
-  @DisplayName("우승자가 한명일 때 성공")
-  void getWinnerTest() {
+  @DisplayName("우승자가 여러명일 때 성공")
+  void getWinnersTest() {
     // given
     GamePlay game = new GamePlay();
     Car car1 = generateCar("아반떼", 3);
@@ -27,8 +27,8 @@ public class GamePlayTest {
   }
 
   @Test
-  @DisplayName("우승자가 여러명일 때 성공")
-  void getWinnersTest() {
+  @DisplayName("우승자가 한명일 때 성공")
+  void getWinnerTest() {
     // given
     GamePlay game = new GamePlay();
     Car car1 = generateCar("아반떼", 3);
