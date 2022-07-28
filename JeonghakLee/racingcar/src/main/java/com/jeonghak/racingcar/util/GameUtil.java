@@ -24,13 +24,5 @@ public class GameUtil {
     System.out.println(message);
   }
 
-  public static boolean isPossibleToMove() {
-    return getRandomNumber() > 3;
-  }
-
-  public static int getRandomNumber() {
-    Random random = new Random();
-    return random.nextInt(10);
-  }
 
 }
