@@ -12,14 +12,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class InputTest {
-  private void setSystemInput(String input){
+
+  private void setSystemInput(String input) {
     ByteArrayInputStream systemInput = new ByteArrayInputStream(input.getBytes());
     User.sc = new Scanner(systemInput);
     System.setIn(systemInput);
   }
+
   @Test
   @DisplayName("정상적인 자동차 이름 입력 테스트")
-  public void InputCarName(){
+  public void InputCarName() {
     User user = new User();
     GameController gameController = new GameController(user);
 
@@ -31,9 +33,10 @@ public class InputTest {
     Assertions.assertThat(user.getCarNameList().length).isEqualTo(3);
     Assertions.assertThat(gameController.isCarNameError()).isEqualTo(NO_ERROR);
   }
+
   @Test
   @DisplayName("5글자 이상의 이름이 입력되었을 때")
-  public void InputCarNameGreaterThanFive(){
+  public void InputCarNameGreaterThanFive() {
     User user = new User();
     GameController gameController = new GameController(user);
 
@@ -42,9 +45,10 @@ public class InputTest {
 
     Assertions.assertThat(gameController.isCarNameError()).isEqualTo(ERROR);
   }
+
   @Test
   @DisplayName("0글자 이름이 입력되었을 때")
-  public void InputCarNameIsZero(){
+  public void InputCarNameIsZero() {
     User user = new User();
     GameController gameController = new GameController(user);
 
@@ -53,9 +57,10 @@ public class InputTest {
 
     Assertions.assertThat(gameController.isCarNameError()).isEqualTo(ERROR);
   }
+
   @Test
   @DisplayName("연속된 콤마가 입력되었을 때")
-  public void ContinuousComma(){
+  public void ContinuousComma() {
     User user = new User();
     GameController gameController = new GameController(user);
 
@@ -64,9 +69,10 @@ public class InputTest {
 
     Assertions.assertThat(gameController.isCarNameError()).isEqualTo(ERROR);
   }
+
   @Test
   @DisplayName("정상적인 시도 횟수 입력 테스트")
-  public void InputTryNumber(){
+  public void InputTryNumber() {
     User user = new User();
     GameController gameController = new GameController(user);
 
@@ -75,19 +81,10 @@ public class InputTest {
     Assertions.assertThat(gameController.isTryNumberError()).isEqualTo(NO_ERROR);
     Assertions.assertThat(user.getTryNumber()).isEqualTo("5");
   }
-  @Test
-  @DisplayName("9보다 큰 수가 시도횟수로 입력되었을 때")
-  public void TryNumberGreaterThanNine(){
-    User user = new User();
-    GameController gameController = new GameController(user);
 
-    setSystemInput("15");
-    user.userInputTryNumber();
-    Assertions.assertThat(gameController.isTryNumberError()).isEqualTo(ERROR);
-  }
   @Test
   @DisplayName("0이 시도횟수로 입력되었을 때")
-  public void ZeroTryNumber(){
+  public void ZeroTryNumber() {
     User user = new User();
     GameController gameController = new GameController(user);
 
@@ -95,9 +92,10 @@ public class InputTest {
     user.userInputTryNumber();
     Assertions.assertThat(gameController.isTryNumberError()).isEqualTo(ERROR);
   }
+
   @Test
   @DisplayName("음수가 시도횟수로 입력되었을 때")
-  public void NegativeTryNumber(){
+  public void NegativeTryNumber() {
     User user = new User();
     GameController gameController = new GameController(user);
 
@@ -105,9 +103,10 @@ public class InputTest {
     user.userInputTryNumber();
     Assertions.assertThat(gameController.isTryNumberError()).isEqualTo(ERROR);
   }
+
   @Test
   @DisplayName("문자열이 시도횟수로 입력되었을 때")
-  public void InputStringTryNumber(){
+  public void InputStringTryNumber() {
     User user = new User();
     GameController gameController = new GameController(user);
 

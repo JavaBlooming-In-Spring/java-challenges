@@ -4,43 +4,51 @@ import java.util.Scanner;
 
 
 public class User {
-    private String carName;
-    private String[] carList;
-    private String tryNumber;
-    public static Scanner sc = new Scanner(System.in);
 
-    User(){
-        this.carName = carName;
-        this.carList =  carList;
-        this.tryNumber = tryNumber;
-    }
-    public void closeScanner(){
-        sc.close();
-    }
-    public void setCarName(){
-        carName = "";
-    }
-    public void setTryNumber(){
-        tryNumber = "";
-    }
-    public void userInputCarName(){
-        carName = sc.nextLine();
-    }
+  private String carNames;
+  private String[] carList;
+  private String tryNumber;
+  public static Scanner sc = new Scanner(System.in);
 
-    public void userInputTryNumber(){
-        tryNumber = sc.nextLine();
-    }
-    public String getCarName(){
-        return carName;
-    }
-    public String getTryNumber(){
-        return tryNumber;
-    }
-    public String[] getCarNameList(){
-        return carList;
-    }
-    public void saveCarList(String[] array){
-        this.carList = array;
-    }
+  User() {
+    this.carNames = carNames;
+    this.carList = carList;
+    this.tryNumber = tryNumber;
+  }
 
+  public static void closeScanner() {
+    sc.close();
+  }
+
+  public void initCarName() {
+    carNames = "";
+  }
+
+  public void setTryNumber() {
+    tryNumber = "";
+  }
+
+  public void userInputCarName() {
+    carNames = sc.nextLine();
+  }
+
+  public void userInputTryNumber() {
+    tryNumber = sc.nextLine();
+  }
+
+  public String getCarName() {
+    return carNames;
+  }
+
+  public String getTryNumber() {
+    return tryNumber;
+  }
+
+  public String[] getCarNameList() {
+    return carList;
+  }
+
+  public void saveCarList(String[] array) {
+    this.carList = array;
+  }
 }
