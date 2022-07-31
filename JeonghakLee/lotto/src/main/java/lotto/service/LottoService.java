@@ -35,6 +35,7 @@ public class LottoService {
     setWinningStatistics(winningLotto);
     printWinningStatistics(winningStatistics);
     printYield(calculateYield(money));
+    inputService.close();
   }
 
   private WinningLotto generateWinningLotto() {

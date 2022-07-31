@@ -1,6 +1,7 @@
 package lotto.service;
 
 import static lotto.util.LottoUtil.LENGTH_OF_LOTTO_NUMBERS;
+import static lotto.util.LottoUtil.LOTTO_PRICE;
 import static lotto.util.LottoUtil.MAX_LOTTO_NUMBER;
 import static lotto.util.LottoUtil.MIN_LOTTO_NUMBER;
 
@@ -22,12 +23,12 @@ public class ValidateService {
   }
 
   static void checkEnoughMoney(long input) {
-    if (input < MAX_LOTTO_NUMBER) {
+    if (input < LOTTO_PRICE) {
       throw new IllegalArgumentException("구매할 돈이 부족이 부족합니다.");
     }
   }
 
-  public static void checkValidLottoNumbers(List<Integer> lottoNumbers) {
+  static void checkValidLottoNumbers(List<Integer> lottoNumbers) {
     checkValidLottoNumbersLength(lottoNumbers);
     checkValidLottoNumbersRange(lottoNumbers);
     checkHasDuplicateNumbers(lottoNumbers);

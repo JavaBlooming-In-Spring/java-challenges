@@ -12,16 +12,13 @@ import org.junit.jupiter.api.Test;
 
 class InputServiceTest {
 
-  public static Scanner scanner = new Scanner(System.in);
   private final InputService inputService = new InputService();
 
   @Test
   @DisplayName("정상 구매금액 입력 테스트")
   void InputMoneyTest() {
     // given
-    ByteArrayInputStream inputStream = new ByteArrayInputStream("120000".getBytes());
-    inputService.scanner = new Scanner(inputStream);
-    System.setIn(inputStream);
+    setUserInput("120000");
     // when
     inputService.trySetValidMoney();
     // then
@@ -32,9 +29,7 @@ class InputServiceTest {
   @DisplayName("구매금액 음수 입력 테스트")
   void InputNegativeMoneyTest() {
     // given
-    ByteArrayInputStream inputStream = new ByteArrayInputStream("-200".getBytes());
-    inputService.scanner = new Scanner(inputStream);
-    System.setIn(inputStream);
+    setUserInput("-200");
     // when
     boolean result = inputService.trySetValidMoney();
     // then
@@ -58,21 +53,18 @@ class InputServiceTest {
   @DisplayName("정상 당첨번호 입력 테스트")
   void InputWinningLottoTest() {
     // given
-    ByteArrayInputStream inputStream = new ByteArrayInputStream("1,7,11,21,34,45".getBytes());
-    inputService.scanner = new Scanner(inputStream);
-    System.setIn(inputStream);
+    setUserInput("1,7,11,21,34,45");
     // when
     inputService.trySetWinningLottoNumbers();
     // then
     assertThat(inputService.getWinningLottoNumbers()).contains(1, 7, 11, 21, 34, 45);
   }
+
   @Test
   @DisplayName("정상로또 개수보다 많은 당첨번호 입력 테스트")
   void InputMoreLengthWinningLottoTest() {
     // given
-    ByteArrayInputStream inputStream = new ByteArrayInputStream("1,7,11,16,21,34,45".getBytes());
-    inputService.scanner = new Scanner(inputStream);
-    System.setIn(inputStream);
+    setUserInput("1,7,11,16,21,34,45");
     // when
     boolean result = inputService.trySetWinningLottoNumbers();
     // then
@@ -83,9 +75,7 @@ class InputServiceTest {
   @DisplayName("정상로또 개수보다 적은 당첨번호 입력 테스트")
   void InputLessLengthWinningLottoTest() {
     // given
-    ByteArrayInputStream inputStream = new ByteArrayInputStream("1,7,11,16".getBytes());
-    inputService.scanner = new Scanner(inputStream);
-    System.setIn(inputStream);
+    setUserInput("1,7,11,16");
     // when
     boolean result = inputService.trySetWinningLottoNumbers();
     // then
@@ -96,9 +86,7 @@ class InputServiceTest {
   @DisplayName("정상로또 개수보다 적은 당첨번호 입력 테스트")
   void InputDuplicateWinningLottoTest() {
     // given
-    ByteArrayInputStream inputStream = new ByteArrayInputStream("1,7,7,11,16,45".getBytes());
-    inputService.scanner = new Scanner(inputStream);
-    System.setIn(inputStream);
+    setUserInput("1,7,7,11,16,45");
     // when
     boolean result = inputService.trySetWinningLottoNumbers();
     // then
@@ -109,9 +97,7 @@ class InputServiceTest {
   @DisplayName("로또 숫자 범위가 아닌 당첨번호 입력 테스트")
   void InputInvalidNumberRangeWinningLottoTest() {
     // given
-    ByteArrayInputStream inputStream = new ByteArrayInputStream("66,7,11,16,45,22".getBytes());
-    inputService.scanner = new Scanner(inputStream);
-    System.setIn(inputStream);
+    setUserInput("66,7,11,16,45,22");
     // when
     boolean result = inputService.trySetWinningLottoNumbers();
     // then
@@ -122,9 +108,7 @@ class InputServiceTest {
   @DisplayName("보너스 볼 정상 입력 테스트")
   void InputBonusBallTest() {
     // given
-    ByteArrayInputStream inputStream = new ByteArrayInputStream("35".getBytes());
-    inputService.scanner = new Scanner(inputStream);
-    System.setIn(inputStream);
+    setUserInput("35");
     List<Integer> winningLottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     // when
     inputService.trySetBonusBall(winningLottoNumbers);
@@ -150,13 +134,17 @@ class InputServiceTest {
   @DisplayName("당첨 번호에 포함되는 보너스 볼 입력 테스트")
   void InputWinningLottoNumbersContainBonusBallTest() {
     // given
-    ByteArrayInputStream inputStream = new ByteArrayInputStream("6".getBytes());
-    inputService.scanner = new Scanner(inputStream);
-    System.setIn(inputStream);
+    setUserInput("6");
     List<Integer> winningLottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     // when
     boolean result = inputService.trySetBonusBall(winningLottoNumbers);
     // then
     assertThat(result).isFalse();
+  }
+
+  private void setUserInput(String input) {
+    ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
+    inputService.scanner = new Scanner(inputStream);
+    System.setIn(inputStream);
   }
 }

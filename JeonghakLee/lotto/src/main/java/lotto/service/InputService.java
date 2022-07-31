@@ -17,6 +17,10 @@ public class InputService {
   private List<Integer> winningLottoNumbers;
   private int bonusBall;
 
+  public void close() {
+    scanner.close();
+  }
+
   public long getMoney() {
     return money;
   }
