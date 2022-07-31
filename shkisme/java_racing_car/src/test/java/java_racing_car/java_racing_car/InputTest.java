@@ -31,6 +31,9 @@ public class InputTest {
     gameController.generateCarNameList();
 
     Assertions.assertThat(user.getCarNameList().length).isEqualTo(3);
+    Assertions.assertThat(user.getCarNameList()[0]).isEqualTo("pobi");
+    Assertions.assertThat(user.getCarNameList()[1]).isEqualTo("won");
+    Assertions.assertThat(user.getCarNameList()[2]).isEqualTo("jun");
     Assertions.assertThat(gameController.isCarNameError()).isEqualTo(NO_ERROR);
   }
 

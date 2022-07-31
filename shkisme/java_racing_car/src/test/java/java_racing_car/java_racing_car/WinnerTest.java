@@ -31,6 +31,7 @@ public class WinnerTest {
     game.generateWinnerList(game.getHighestScore());
 
     Assertions.assertThat(game.winnerList.size()).isEqualTo(1);
+    Assertions.assertThat(game.winnerList.get(0)).isEqualTo("pobi");
   }
 
   @Test
@@ -51,5 +52,7 @@ public class WinnerTest {
     game.generateWinnerList(game.getHighestScore());
 
     Assertions.assertThat(game.winnerList.size()).isEqualTo(2);
+    Assertions.assertThat(game.winnerList.get(0)).isEqualTo("pobi");
+    Assertions.assertThat(game.winnerList.get(1)).isEqualTo("woni");
   }
 }
