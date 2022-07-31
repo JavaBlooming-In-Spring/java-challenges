@@ -6,5 +6,4 @@ public class LottoUtil {
   public static Integer MIN_LOTTO_NUMBER = 1;
   public static Integer LENGTH_OF_LOTTO_NUMBERS = 6;
 
-
 }

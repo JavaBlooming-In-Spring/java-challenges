@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class InputService {
 
-  private static final Scanner scanner = new Scanner(System.in);
+  Scanner scanner = new Scanner(System.in);
   private long money;
   private List<Integer> winningLottoNumbers;
   private int bonusBall;
@@ -47,11 +47,11 @@ public class InputService {
   }
 
   void inputBonusBall() {
-    while (!trySetBonusBall())
+    while (!trySetBonusBall(winningLottoNumbers))
       ;
   }
 
-  private boolean trySetValidMoney() {
+  boolean trySetValidMoney() {
     try {
       long input = getInputMoney();
       checkValidMoney(input);
@@ -73,7 +73,7 @@ public class InputService {
     this.money = money;
   }
 
-  private boolean trySetBonusBall() {
+  boolean trySetBonusBall(List<Integer> winningLottoNumbers) {
     try {
       int input = getInputBonusBall();
       checkValidBonusNumber(winningLottoNumbers, input);
@@ -94,7 +94,7 @@ public class InputService {
     this.bonusBall = bonusBall;
   }
 
-  private boolean trySetWinningLottoNumbers() {
+  boolean trySetWinningLottoNumbers() {
     try {
       String input = inputLottoNumbers();
       List<Integer> lottoNumbers = castToList(input);
@@ -115,7 +115,7 @@ public class InputService {
         .toList();
   }
 
-  private static String inputLottoNumbers() {
+  private String inputLottoNumbers() {
     printMessage("지난 주 당첨 번호를 입력해 주세요");
     return scanner.nextLine();
   }
