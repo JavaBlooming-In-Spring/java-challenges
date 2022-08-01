@@ -20,14 +20,6 @@ public class User {
     sc.close();
   }
 
-  public void initCarName() {
-    carNames = "";
-  }
-
-  public void setTryNumber() {
-    tryNumber = "";
-  }
-
   public void userInputCarName() {
     carNames = sc.nextLine();
   }

@@ -1,6 +1,7 @@
 package java_racing_car.java_racing_car;
 
 import java.io.ByteArrayInputStream;
+import java.util.List;
 import java.util.Scanner;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -19,13 +20,11 @@ public class CarTest {
   public void CarListTest() {
     User user = new User();
     GameController gameController = new GameController(user);
-    Game game = new Game(user, gameController);
 
     setSystemInput("pobi,woni,jun");
 
     user.userInputCarName();
-    gameController.generateCarNameList();
-    gameController.generateCarList();
+    gameController.generateList();
 
     Assertions.assertThat(gameController.carList.size()).isEqualTo(3);
     Assertions.assertThat(gameController.carList.containsAll(List.of("pobi", "woni", "jun")));
@@ -36,12 +35,10 @@ public class CarTest {
   public void CarScoreTest() {
     User user = new User();
     GameController gameController = new GameController(user);
-    Game game = new Game(user, gameController);
 
     setSystemInput("pobi,woni,jun");
     user.userInputCarName();
-    gameController.generateCarNameList();
-    gameController.generateCarList();
+    gameController.generateList();
 
     gameController.carList.get(0).plusScore();
     gameController.carList.get(0).plusScore();

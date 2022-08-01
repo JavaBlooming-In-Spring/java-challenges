@@ -28,7 +28,7 @@ public class InputTest {
     setSystemInput("pobi,won,jun");
 
     user.userInputCarName();
-    gameController.generateCarNameList();
+    gameController.generateList();
 
     Assertions.assertThat(user.getCarNameList().length).isEqualTo(3);
     Assertions.assertThat(user.getCarNameList()[0]).isEqualTo("pobi");

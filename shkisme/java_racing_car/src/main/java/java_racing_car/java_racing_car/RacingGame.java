@@ -1,21 +1,19 @@
 package java_racing_car.java_racing_car;
 
-import static java_racing_car.java_racing_car.Game.GameMessage.FINAL_WINNER;
+import static java_racing_car.java_racing_car.RacingGame.GameMessage.FINAL_WINNER;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import org.springframework.util.StringUtils;
 
-public class Game {
+public class RacingGame {
 
   private final User user;
   private final GameController gameController;
   private final Random random = new Random();
   List<String> winnerList = new ArrayList<>();
 
-  Game(User user, GameController gameController) {
+  RacingGame(User user, GameController gameController) {
     this.user = user;
     this.gameController = gameController;
     this.winnerList = winnerList;
@@ -29,7 +27,7 @@ public class Game {
     }
   }
 
-  private void racingCar(){
+  private void racingCar() {
     for (Car car : gameController.getCarList()) {
       if (isNumberGreaterThanFour(generateRandomNumber())) {
         car.plusScore();
@@ -55,16 +53,18 @@ public class Game {
     }
     System.out.println("\n");
   }
-  public void gameResult(){
+
+  public void gameResult() {
     generateWinnerList(getHighestScore());
     printWinner();
   }
 
   public int getHighestScore() {
     int max = 0;
-    for (Car car:  gameController.getCarList()){
-      if (max <= car.getScore())
+    for (Car car : gameController.getCarList()) {
+      if (max <= car.getScore()) {
         max = car.getScore();
+      }
     }
     return max;
   }

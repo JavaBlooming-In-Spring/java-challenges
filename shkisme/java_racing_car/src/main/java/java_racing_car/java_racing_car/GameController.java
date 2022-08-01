@@ -58,17 +58,23 @@ public class GameController {
     System.out.println(TRY_NUMBER_ERROR.getGameContollerMessage());
   }
 
-  public void generateCarNameList() {
+  public void generateList() {
+    generateCarNameList();
+    generateCarList();
+  }
+
+  private void generateCarNameList() {
     String[] array = user.getCarName().split(",");
     user.saveCarList(array);
   }
 
-  public void generateCarList() {
+  private void generateCarList() {
     for (String str : user.getCarNameList()) {
       Car car = new Car(str);
       carList.add(car);
     }
   }
+
 
   public ArrayList<Car> getCarList() {
     return carList;

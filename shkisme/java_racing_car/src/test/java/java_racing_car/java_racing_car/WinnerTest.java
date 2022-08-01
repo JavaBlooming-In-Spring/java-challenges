@@ -19,19 +19,18 @@ public class WinnerTest {
   public void OneWinnerTest() {
     User user = new User();
     GameController gameController = new GameController(user);
-    Game game = new Game(user, gameController);
+    RacingGame racingGame = new RacingGame(user, gameController);
 
     setSystemInput("pobi,woni,jun");
     user.userInputCarName();
-    gameController.generateCarNameList();
-    gameController.generateCarList();
+    gameController.generateList();
 
     gameController.carList.get(0).plusScore();
 
-    game.generateWinnerList(game.getHighestScore());
+    racingGame.generateWinnerList(racingGame.getHighestScore());
 
-    Assertions.assertThat(game.winnerList.size()).isEqualTo(1);
-    Assertions.assertThat(game.winnerList.get(0)).isEqualTo("pobi");
+    Assertions.assertThat(racingGame.winnerList.size()).isEqualTo(1);
+    Assertions.assertThat(racingGame.winnerList.get(0)).isEqualTo("pobi");
   }
 
   @Test
@@ -39,20 +38,19 @@ public class WinnerTest {
   public void ManyWinnerTest() {
     User user = new User();
     GameController gameController = new GameController(user);
-    Game game = new Game(user, gameController);
+    RacingGame racingGame = new RacingGame(user, gameController);
 
     setSystemInput("pobi,woni,jun");
     user.userInputCarName();
-    gameController.generateCarNameList();
-    gameController.generateCarList();
+    gameController.generateList();
 
     gameController.carList.get(0).plusScore();
     gameController.carList.get(1).plusScore();
 
-    game.generateWinnerList(game.getHighestScore());
+    racingGame.generateWinnerList(racingGame.getHighestScore());
 
-    Assertions.assertThat(game.winnerList.size()).isEqualTo(2);
-    Assertions.assertThat(game.winnerList.get(0)).isEqualTo("pobi");
-    Assertions.assertThat(game.winnerList.get(1)).isEqualTo("woni");
+    Assertions.assertThat(racingGame.winnerList.size()).isEqualTo(2);
+    Assertions.assertThat(racingGame.winnerList.get(0)).isEqualTo("pobi");
+    Assertions.assertThat(racingGame.winnerList.get(1)).isEqualTo("woni");
   }
 }
