@@ -7,6 +7,7 @@ import static lotto.domain.Rank.SECOND;
 import static lotto.domain.Rank.THIRD;
 
 import java.util.Arrays;
+import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ public class WinningLottoTest {
     // given
     Lotto userLotto = new Lotto(Arrays.asList(1, 11, 16, 27, 31, 45));
     // when
-    Rank rank = winningLotto.match(userLotto);
+    Optional<Rank> rank = winningLotto.match(userLotto);
     // then
     Assertions.assertThat(rank).isEqualTo(FIRST);
   }
@@ -33,7 +34,7 @@ public class WinningLottoTest {
     // given
     Lotto userLotto = new Lotto(Arrays.asList(1, 11, 16, 27, 31, 35));
     // when
-    Rank rank = winningLotto.match(userLotto);
+    Optional<Rank> rank = winningLotto.match(userLotto);
     // then
     Assertions.assertThat(rank).isEqualTo(SECOND);
   }
@@ -44,7 +45,7 @@ public class WinningLottoTest {
     // given
     Lotto userLotto = new Lotto(Arrays.asList(1, 11, 16, 27, 31, 40));
     // when
-    Rank rank = winningLotto.match(userLotto);
+    Optional<Rank> rank = winningLotto.match(userLotto);
     // then
     Assertions.assertThat(rank).isEqualTo(THIRD);
   }
@@ -55,7 +56,7 @@ public class WinningLottoTest {
     // given
     Lotto userLotto = new Lotto(Arrays.asList(1, 11, 16, 27, 30, 40));
     // when
-    Rank rank = winningLotto.match(userLotto);
+    Optional<Rank> rank = winningLotto.match(userLotto);
     // then
     Assertions.assertThat(rank).isEqualTo(FORTH);
   }
@@ -66,7 +67,7 @@ public class WinningLottoTest {
     // given
     Lotto userLotto = new Lotto(Arrays.asList(1, 11, 16, 28, 29, 30));
     // when
-    Rank rank = winningLotto.match(userLotto);
+    Optional<Rank> rank = winningLotto.match(userLotto);
     // then
     Assertions.assertThat(rank).isEqualTo(FIFTH);
   }
@@ -77,7 +78,7 @@ public class WinningLottoTest {
     // given
     Lotto userLotto = new Lotto(Arrays.asList(1, 11, 15, 28, 29, 30));
     // when
-    Rank rank = winningLotto.match(userLotto);
+    Optional<Rank> rank = winningLotto.match(userLotto);
     // then
     Assertions.assertThat(rank).isNull();
   }

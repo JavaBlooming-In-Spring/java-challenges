@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.Set;
 
 public class ValidateService {
-
+  public enum Valid {
+    VALID,
+    INVALID
+  }
   static void checkValidMoney(Long input) {
     checkNegative(input);
     checkEnoughMoney(input);

@@ -2,6 +2,8 @@ package lotto.service;
 
 import static lotto.service.PrintService.printInputMoneyRequest;
 import static lotto.service.PrintService.printMessage;
+import static lotto.service.ValidateService.Valid.INVALID;
+import static lotto.service.ValidateService.Valid.VALID;
 import static lotto.service.ValidateService.checkValidBonusNumber;
 import static lotto.service.ValidateService.checkValidLottoNumbers;
 import static lotto.service.ValidateService.checkValidMoney;
@@ -9,6 +11,7 @@ import static lotto.service.ValidateService.checkValidMoney;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import lotto.service.ValidateService.Valid;
 
 public class InputService {
 
@@ -41,32 +44,32 @@ public class InputService {
 
   void inputMoney() {
     printInputMoneyRequest();
-    while (!trySetValidMoney())
+    while (trySetValidMoney() == INVALID)
       ;
   }
 
   void inputWinningLottoNumbers() {
-    while (!trySetWinningLottoNumbers())
+    while (trySetWinningLottoNumbers() == INVALID)
       ;
   }
 
   void inputBonusBall() {
-    while (!trySetBonusBall(winningLottoNumbers))
+    while (trySetBonusBall(winningLottoNumbers) == INVALID)
       ;
   }
 
-  boolean trySetValidMoney() {
+  Valid trySetValidMoney() {
     try {
       long input = getInputMoney();
       checkValidMoney(input);
       setMoney(input);
-      return true;
+      return VALID;
     } catch (NumberFormatException e) {
       printMessage("64비트 정수입력 범위를 벗어났습니다.");
     } catch (Exception e) {
       printMessage(e.getMessage());
     }
-    return false;
+    return INVALID;
   }
 
   private Long getInputMoney() {
@@ -77,16 +80,16 @@ public class InputService {
     this.money = money;
   }
 
-  boolean trySetBonusBall(List<Integer> winningLottoNumbers) {
+  Valid trySetBonusBall(List<Integer> winningLottoNumbers) {
     try {
       int input = getInputBonusBall();
       checkValidBonusNumber(winningLottoNumbers, input);
       setBonusBall(input);
-      return true;
+      return VALID;
     } catch (Exception e) {
       printMessage(e.getMessage());
     }
-    return false;
+    return INVALID;
   }
 
   private int getInputBonusBall() {
@@ -98,19 +101,19 @@ public class InputService {
     this.bonusBall = bonusBall;
   }
 
-  boolean trySetWinningLottoNumbers() {
+  Valid trySetWinningLottoNumbers() {
     try {
       String input = inputLottoNumbers();
       List<Integer> lottoNumbers = castToList(input);
       checkValidLottoNumbers(lottoNumbers);
       setWinningLottoNumbers(lottoNumbers);
-      return true;
+      return VALID;
     } catch (NumberFormatException e) {
       printMessage("32비트 정수입력 범위를 벗어났습니다.");
     } catch (Exception e) {
       printMessage(e.getMessage());
     }
-    return false;
+    return INVALID;
   }
 
   static List<Integer> castToList(String input) {
