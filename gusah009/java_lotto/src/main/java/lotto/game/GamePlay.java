@@ -55,7 +55,7 @@ public class GamePlay {
   }
 
   private Lotto generateRandomLotto() {
-    List<Integer> availableLottoRange = IntStream.range(MIN_LOTTO_NUM, MAX_LOTTO_NUM)
+    List<Integer> availableLottoRange = IntStream.range(MIN_LOTTO_NUM, MAX_LOTTO_NUM + 1)
         .boxed()
         .collect(Collectors.toList());
     Collections.shuffle(availableLottoRange);
