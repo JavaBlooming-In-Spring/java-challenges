@@ -28,7 +28,7 @@ public class GamePlay {
   final List<Lotto> purchaseLottoList = new ArrayList<>();
   WinningLotto winningLotto = null;
 
-  public void play() {
+  public void start() {
     input();
     result();
   }
