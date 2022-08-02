@@ -4,6 +4,7 @@ import static lotto.domain.Rank.getRank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class WinningLotto {
 
@@ -19,7 +20,7 @@ public class WinningLotto {
     return lotto;
   }
 
-  public Rank match(Lotto userLotto) {
+  public Optional<Rank> match(Lotto userLotto) {
     int matchedNumbers = getMatchedNumbers(userLotto);
     boolean hasBonusNo = userLotto.getNumbers().contains(bonusNo);
     return getRank(matchedNumbers, hasBonusNo);

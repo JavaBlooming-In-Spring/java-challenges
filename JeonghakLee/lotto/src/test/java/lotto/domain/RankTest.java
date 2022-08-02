@@ -8,6 +8,7 @@ import static lotto.domain.Rank.THIRD;
 import static lotto.domain.Rank.getRank;
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ public class RankTest {
     int numberOfMatched = 6;
     boolean hasBonus = false;
     // when
-    Rank rank = getRank(numberOfMatched, hasBonus);
+    Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
     assertThat(rank).isEqualTo(FIRST);
   }
@@ -32,7 +33,7 @@ public class RankTest {
     int numberOfMatched = 5;
     boolean hasBonus = true;
     // when
-    Rank rank = getRank(numberOfMatched, hasBonus);
+    Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
     assertThat(rank).isEqualTo(SECOND);
   }
@@ -44,7 +45,7 @@ public class RankTest {
     int numberOfMatched = 5;
     boolean hasBonus = false;
     // when
-    Rank rank = getRank(numberOfMatched, hasBonus);
+    Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
     assertThat(rank).isEqualTo(THIRD);
   }
@@ -56,7 +57,7 @@ public class RankTest {
     int numberOfMatched = 4;
     boolean hasBonus = false;
     // when
-    Rank rank = getRank(numberOfMatched, hasBonus);
+    Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
     assertThat(rank).isEqualTo(FORTH);
   }
@@ -68,7 +69,7 @@ public class RankTest {
     int numberOfMatched = 3;
     boolean hasBonus = false;
     // when
-    Rank rank = getRank(numberOfMatched, hasBonus);
+    Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
     assertThat(rank).isEqualTo(FIFTH);
   }
@@ -80,7 +81,7 @@ public class RankTest {
     int numberOfMatched = 2;
     boolean hasBonus = false;
     // when
-    Rank rank = getRank(numberOfMatched, hasBonus);
+    Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
     assertThat(rank).isNull();
   }

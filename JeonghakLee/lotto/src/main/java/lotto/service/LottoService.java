@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import lotto.domain.Lotto;
 import lotto.domain.Rank;
 import lotto.domain.WinningLotto;
@@ -19,9 +20,9 @@ public class LottoService {
 
   private final InputService inputService = new InputService();
   private final List<Lotto> purchasedLotto = new ArrayList<>();
-  private final Map<Rank, Integer> winningStatistics = new HashMap<>() {{
+  private final Map<Optional<Rank>, Integer> winningStatistics = new HashMap<java.util.Optional<Rank>, Integer>() {{
     for (Rank rank : RANKLIST) {
-      put(rank, 0);
+      put(Optional.ofNullable(rank), 0);
     }
   }};
 
@@ -55,8 +56,8 @@ public class LottoService {
 
   private void setWinningStatistics(WinningLotto winningLotto) {
     for (Lotto lotto : purchasedLotto) {
-      Rank rank = winningLotto.match(lotto);
-      if (rank != null) {
+      Optional<Rank> rank = winningLotto.match(lotto);
+      if (rank.isPresent()) {
         winningStatistics.put(rank, winningStatistics.get(rank) + 1);
       }
     }

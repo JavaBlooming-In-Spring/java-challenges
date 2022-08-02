@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Rank {
 
@@ -23,19 +24,19 @@ public class Rank {
     this.winningPrice = winningPrice;
   }
 
-  public static Rank getRank(int matchedNumbers, boolean hasBonus) {
-    if (matchedNumbers == 6 && !hasBonus) {
-      return FIRST;
+  public static Optional<Rank> getRank(int matchedNumbers, boolean hasBonus) {
+    if (matchedNumbers == 6) {
+      return Optional.ofNullable(FIRST);
     } else if (matchedNumbers == 5 && hasBonus) {
-      return SECOND;
+      return Optional.ofNullable(SECOND);
     } else if (matchedNumbers == 5 && !hasBonus) {
-      return THIRD;
-    } else if (matchedNumbers == 4 && !hasBonus) {
-      return FORTH;
-    } else if (matchedNumbers == 3 && !hasBonus) {
-      return FIFTH;
+      return Optional.ofNullable(THIRD);
+    } else if (matchedNumbers == 4) {
+      return Optional.ofNullable(FORTH);
+    } else if (matchedNumbers == 3) {
+      return Optional.ofNullable(FIFTH);
     }
-    return null;
+    return Optional.empty();
   }
 
   public int getMatchedNumbers() {

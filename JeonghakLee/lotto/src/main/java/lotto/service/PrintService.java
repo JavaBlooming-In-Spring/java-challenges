@@ -3,6 +3,7 @@ package lotto.service;
 import static lotto.domain.Rank.RANKLIST;
 
 import java.util.Map;
+import java.util.Optional;
 import lotto.domain.Rank;
 
 public class PrintService {
@@ -20,7 +21,7 @@ public class PrintService {
     printMessage("---------");
   }
 
-  public static void printWinningStatistics(Map<Rank, Integer> winningStatistics) {
+  public static void printWinningStatistics(Map<Optional<Rank>, Integer> winningStatistics) {
     printWiningStatisticsMessage();
     for (Rank rank : RANKLIST) {
       int count = winningStatistics.get(rank);
