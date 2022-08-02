@@ -22,8 +22,8 @@ public class WinningLotto {
   }
 
   private int calculateMatchCount(Lotto userLotto) {
-    List<Integer> lastWeekNumbers = new ArrayList<>(lotto.getNumbers());
-    List<Integer> userNumbers = new ArrayList<>(userLotto.getNumbers());
+    List<Integer> lastWeekNumbers = lotto.getNumbers();
+    List<Integer> userNumbers = userLotto.getNumbers();
     lastWeekNumbers.retainAll(userNumbers);
     return lastWeekNumbers.size();
   }

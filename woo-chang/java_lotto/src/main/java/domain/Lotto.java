@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public class Lotto {
   }
 
   public List<Integer> getNumbers() {
-    return this.numbers;
+    return new ArrayList<>(numbers);
   }
 
   // 추가 기능 구현
