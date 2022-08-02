@@ -9,7 +9,6 @@ import lotto.repository.RankRepository;
  */
 public class WinningLotto {
 
-  private final RankRepository rankRepository = RankRepository.getRankRepository();
   private final Lotto lotto;
   private final int bonusNo;
 
@@ -22,7 +21,8 @@ public class WinningLotto {
     // TODO 로직 구현
     int matchCount = getMatchCount(this.lotto, userLotto);
     boolean isMatchBonusNo = userLotto.getNumbers().contains(bonusNo);
-    return rankRepository.findByMatchCount(matchCount, isMatchBonusNo);
+    return RankRepository.getRankRepository()
+        .findByMatchCount(matchCount, isMatchBonusNo);
   }
 
   private int getMatchCount(Lotto lotto1, Lotto lotto2) {
