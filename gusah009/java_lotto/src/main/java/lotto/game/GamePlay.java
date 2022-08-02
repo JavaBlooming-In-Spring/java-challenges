@@ -1,17 +1,12 @@
 package lotto.game;
 
+import static lotto.domain.Lotto.newInstance;
 import static lotto.game.GamePrint.printMessage;
 import static lotto.game.GamePrint.printPurchaseLottoList;
 import static lotto.game.GamePrint.printResult;
-import static lotto.game.GameValidate.MAX_LOTTO_NUM;
-import static lotto.game.GameValidate.MIN_LOTTO_NUM;
-import static lotto.game.GameValidate.VALID_LOTTO_LENGTH;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lotto.domain.Lotto;
 import lotto.domain.Result;
 import lotto.domain.WinningLotto;
@@ -48,16 +43,8 @@ public class GamePlay {
     long purchaseLottoCount = purchaseAmount / LOTTO_PRICE;
     printMessage(purchaseLottoCount + "개를 구매했습니다.");
     for (int i = 0; i < purchaseLottoCount; i++) {
-      purchaseLottoList.add(generateRandomLotto());
+      purchaseLottoList.add(newInstance());
     }
-  }
-
-  private Lotto generateRandomLotto() {
-    List<Integer> availableLottoRange = IntStream.range(MIN_LOTTO_NUM, MAX_LOTTO_NUM + 1)
-        .boxed()
-        .collect(Collectors.toList());
-    Collections.shuffle(availableLottoRange);
-    return new Lotto(availableLottoRange.subList(0, VALID_LOTTO_LENGTH));
   }
 
   private void inputLastWeekWinningLotto(GameInput gameInput) {
