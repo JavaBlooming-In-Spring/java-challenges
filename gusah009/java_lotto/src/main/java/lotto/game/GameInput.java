@@ -116,7 +116,6 @@ public class GameInput {
   }
 
   private Integer getPlayerInputNumber() {
-    return scanner.nextInt();
+    return Integer.parseInt(scanner.nextLine());
   }
-
 }
