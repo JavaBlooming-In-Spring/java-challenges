@@ -16,7 +16,7 @@ public class Lotto {
 
   private final List<Integer> numbers;
 
-  public static Lotto generateLotto() {
+  public static Lotto newInstance() {
     List<Integer> candidateList = new ArrayList<>(IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
         .boxed().toList());
     Collections.shuffle(candidateList);

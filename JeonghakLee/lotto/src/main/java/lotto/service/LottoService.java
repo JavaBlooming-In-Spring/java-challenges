@@ -1,6 +1,6 @@
 package lotto.service;
 
-import static lotto.domain.Lotto.generateLotto;
+import static lotto.domain.Lotto.newInstance;
 import static lotto.domain.Rank.RANKLIST;
 import static lotto.service.PrintService.printNumberOfPurchasedLotto;
 import static lotto.service.PrintService.printWinningStatistics;
@@ -45,7 +45,7 @@ public class LottoService {
 
   private void purchaseLotto(long numberOfLotto) {
     for (int i = 0; i < numberOfLotto; i++) {
-      purchasedLotto.add(generateLotto());
+      purchasedLotto.add(newInstance());
     }
   }
 
@@ -68,6 +68,6 @@ public class LottoService {
       int count = winningStatistics.get(rank);
       sum += (long) count * rank.getWinningPrice();
     }
-    return Math.round((sum / (double) purchasePrice) * 1000) / 1000.0;
+    return Math.round((sum / (double) purchasePrice) * LOTTO_PRICE) / (double)LOTTO_PRICE;
   }
 }
