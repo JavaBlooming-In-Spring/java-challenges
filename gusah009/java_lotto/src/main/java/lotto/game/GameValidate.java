@@ -68,4 +68,9 @@ public class GameValidate {
       throw new IllegalArgumentException(Error.INVALID_BONUS_RANGE.getMsg());
     }
   }
+
+  public enum Valid {
+    VALID,
+    INVALID
+  }
 }

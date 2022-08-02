@@ -1,6 +1,8 @@
 package lotto.game;
 
 import static lotto.game.GamePrint.printMessage;
+import static lotto.game.GameValidate.Valid.INVALID;
+import static lotto.game.GameValidate.Valid.VALID;
 import static lotto.game.GameValidate.checkBonusDuplicate;
 import static lotto.game.GameValidate.checkBonusOutOfRange;
 import static lotto.game.GameValidate.checkLottoDuplicate;
@@ -16,6 +18,7 @@ import lotto.domain.Lotto;
 import lotto.domain.WinningLotto;
 import lotto.game.GamePrint.Error;
 import lotto.game.GamePrint.Guide;
+import lotto.game.GameValidate.Valid;
 
 public class GameInput {
 
@@ -25,21 +28,21 @@ public class GameInput {
   Integer winningBonus = null;
 
   public Long inputPurchaseAmount() {
-    while (!tryInputValidPurchaseAmount())
+    while (tryInputValidPurchaseAmount() == INVALID)
       ;
     return purchaseAmount;
   }
 
-  private boolean tryInputValidPurchaseAmount() {
+  private Valid tryInputValidPurchaseAmount() {
     try {
       setValidPurchaseAmount();
-      return true;
+      return VALID;
     } catch (NumberFormatException e) {
       printMessage(Error.INVALID_LONG_FORMAT);
     } catch (Exception e) {
       printMessage(e.getMessage());
     }
-    return false;
+    return INVALID;
   }
 
   private void setValidPurchaseAmount() {
@@ -54,25 +57,25 @@ public class GameInput {
 
   public WinningLotto inputWinningLotto() {
     printMessage(Guide.REQUEST_WINNING_LOTTO_NUMBERS);
-    while (!tryInputValidLottoAndSet())
+    while (tryInputValidLottoAndSet() == INVALID)
       ;
     printMessage(Guide.REQUEST_BONUS_NUMBER);
-    while (!tryInputBonusNumberAndSet())
+    while (tryInputBonusNumberAndSet() == INVALID)
       ;
     return new WinningLotto(winningLotto, winningBonus);
   }
 
 
-  private boolean tryInputValidLottoAndSet() {
+  private Valid tryInputValidLottoAndSet() {
     try {
       setValidLotto();
-      return true;
+      return VALID;
     } catch (NumberFormatException e) {
       printMessage(Error.INVALID_INT_FORMAT);
-      return false;
+      return INVALID;
     } catch (Exception e) {
       printMessage(e.getMessage());
-      return false;
+      return INVALID;
     }
   }
 
@@ -95,16 +98,16 @@ public class GameInput {
     return scanner.nextLine();
   }
 
-  private boolean tryInputBonusNumberAndSet() {
+  private Valid tryInputBonusNumberAndSet() {
     try {
       setValidBonusNumber();
-      return true;
+      return VALID;
     } catch (NumberFormatException e) {
       printMessage(Error.INVALID_INT_FORMAT);
-      return false;
+      return INVALID;
     } catch (Exception e) {
       printMessage(e.getMessage());
-      return false;
+      return INVALID;
     }
   }
 
