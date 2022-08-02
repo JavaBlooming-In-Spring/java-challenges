@@ -1,5 +1,9 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Rank {
   FIRST(6, 2_000_000_000),
   SECOND(5, 30_000_000),
@@ -25,14 +29,11 @@ public enum Rank {
   }
 
   public static Rank of(int matchCount, boolean bonusMatch) {
-    if (matchCount == Rank.FIRST.getMatch())
-      return Rank.FIRST;
-    if (matchCount == Rank.THIRD.getMatch())
-      return distinctBonus(bonusMatch);
-    if (matchCount == Rank.FOURTH.getMatch())
-      return Rank.FOURTH;
-    if (matchCount == Rank.FIFTH.getMatch())
-      return Rank.FIFTH;
+    List<Rank> result = Arrays.stream(Rank.values())
+        .filter(rank -> rank.getMatch() == matchCount)
+        .collect(Collectors.toList());
+    if (result.size() == 1) return result.get(0);
+    if (result.size() == 2) return distinctBonus(bonusMatch);
     return Rank.NONE;
   }
 
