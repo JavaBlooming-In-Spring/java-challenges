@@ -10,11 +10,9 @@ import static lotto.game.GameValidate.VALID_LOTTO_LENGTH;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lotto.domain.Lotto;
-import lotto.domain.Rank;
 import lotto.domain.Result;
 import lotto.domain.WinningLotto;
 import lotto.game.GamePrint.Guide;
@@ -67,31 +65,7 @@ public class GamePlay {
   }
 
   void result() {
-    Result result = getResult();
+    Result result = new Result(purchaseLottoList, winningLotto);
     printResult(result);
-  }
-
-  private Result getResult() {
-    Result result = new Result();
-    calculateMatchResultAndSet(result);
-    calculateRateOfReturnAndSet(result);
-    return result;
-  }
-
-  private void calculateMatchResultAndSet(Result result) {
-    for (Lotto lotto : purchaseLottoList) {
-      Optional<Rank> rank = winningLotto.match(lotto);
-      rank.ifPresent(result::increaseCount);
-    }
-  }
-
-  private void calculateRateOfReturnAndSet(Result result) {
-    long purchaseAmount = purchaseLottoList.size() * LOTTO_PRICE;
-    long totalRevenue = 0;
-    for (Rank rank : rankRepository.findAllRank()) {
-      totalRevenue += rank.getPrice() * result.getCount(rank);
-    }
-    double rateOfReturn = ((double) totalRevenue) / purchaseAmount;
-    result.setRateOfReturn(rateOfReturn);
   }
 }
