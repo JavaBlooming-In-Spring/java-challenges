@@ -10,8 +10,8 @@ public class LottoValidation {
 
   public static PurchaseValidationResult validatePurchaseAboutString(String purchase) {
     if (purchase.matches("[^-](.*)\\D(.*)")) {
-      LottoOutput.print(PurchaseValidationResult.STRING.getErrorMessage());
-      return PurchaseValidationResult.STRING;
+      LottoOutput.print(PurchaseValidationResult.NOT_64BIT_INTEGER.getErrorMessage());
+      return PurchaseValidationResult.NOT_64BIT_INTEGER;
     }
     return PurchaseValidationResult.SUCCESS;
   }
@@ -76,8 +76,8 @@ public class LottoValidation {
 
   public static LottoValidationResult validateLottoString(String lotto) {
     if (lotto.replaceAll(",", "").matches("(.*)\\D(.*)")) {
-      LottoOutput.print(LottoValidationResult.STRING.getErrorMessage());
-      return LottoValidationResult.STRING;
+      LottoOutput.print(LottoValidationResult.NOT_32BIT_INTEGER.getErrorMessage());
+      return LottoValidationResult.NOT_32BIT_INTEGER;
     }
     return LottoValidationResult.SUCCESS;
   }
@@ -102,8 +102,8 @@ public class LottoValidation {
 
   public static LottoValidationResult validateBonusString(String bonus) {
     if (bonus.matches("(.*)\\D(.*)")) {
-      LottoOutput.print(LottoValidationResult.BONUS_STRING.getErrorMessage());
-      return LottoValidationResult.BONUS_STRING;
+      LottoOutput.print(LottoValidationResult.BONUS_NOT_32BIT_INTEGER.getErrorMessage());
+      return LottoValidationResult.BONUS_NOT_32BIT_INTEGER;
     }
     return LottoValidationResult.SUCCESS;
   }

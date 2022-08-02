@@ -18,7 +18,7 @@ public class LottoValidationTest {
     PurchaseValidationResult result = LottoValidation.validatePurchaseAboutString(input);
 
     //then
-    assertThat(result).isEqualTo(PurchaseValidationResult.STRING);
+    assertThat(result).isEqualTo(PurchaseValidationResult.NOT_64BIT_INTEGER);
   }
 
   @Test
@@ -109,7 +109,7 @@ public class LottoValidationTest {
     LottoValidationResult result = LottoValidation.validateLottoString(input);
 
     //then
-    assertThat(result).isEqualTo(LottoValidationResult.STRING);
+    assertThat(result).isEqualTo(LottoValidationResult.NOT_32BIT_INTEGER);
   }
 
   @Test
@@ -150,7 +150,7 @@ public class LottoValidationTest {
     LottoValidationResult result = LottoValidation.validateBonusString(input);
 
     //then
-    assertThat(result).isEqualTo(LottoValidationResult.BONUS_STRING);
+    assertThat(result).isEqualTo(LottoValidationResult.BONUS_NOT_32BIT_INTEGER);
   }
 
 }
