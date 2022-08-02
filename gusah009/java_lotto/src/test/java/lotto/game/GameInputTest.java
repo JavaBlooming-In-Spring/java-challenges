@@ -12,9 +12,7 @@ class GameInputTest {
   @Test
   void inputPurchaseAmountOnce() {
     //given
-    GameInput gameInput = new GameInput();
-    String playerInput = "8000";
-    setSystemInput(playerInput, gameInput);
+    GameInput gameInput = getGameInput("8000");
 
     //when
     gameInput.inputPurchaseAmount();
@@ -26,9 +24,7 @@ class GameInputTest {
   @Test
   void inputPurchaseAmountTwice() {
     //given
-    GameInput gameInput = new GameInput();
-    String playerInput = "-100\r\n8000";
-    setSystemInput(playerInput, gameInput);
+    GameInput gameInput = getGameInput("-100\r\n8000");
 
     //when
     gameInput.inputPurchaseAmount();
@@ -40,9 +36,7 @@ class GameInputTest {
   @Test
   void inputPurchaseAmountThreeTimes() {
     //given
-    GameInput gameInput = new GameInput();
-    String playerInput = "-100\r\n500\r\n8000";
-    setSystemInput(playerInput, gameInput);
+    GameInput gameInput = getGameInput("-100\r\n500\r\n8000");
 
     //when
     gameInput.inputPurchaseAmount();
@@ -54,9 +48,7 @@ class GameInputTest {
   @Test
   void inputWinningLottoOnce() {
     //given
-    GameInput gameInput = new GameInput();
-    String playerInput = "1,2,3,4,5,6\r\n38";
-    setSystemInput(playerInput, gameInput);
+    GameInput gameInput = getGameInput("1,2,3,4,5,6\r\n38");
 
     //when
     gameInput.inputWinningLotto();
@@ -66,12 +58,16 @@ class GameInputTest {
     assertThat(gameInput.winningBonus).isEqualTo(38);
   }
 
+  private GameInput getGameInput(String playerInput) {
+    GameInput gameInput = new GameInput();
+    setSystemInput(playerInput, gameInput);
+    return gameInput;
+  }
+
   @Test
   void inputWinningLottoTwice() {
     //given
-    GameInput gameInput = new GameInput();
-    String playerInput = "-1,2,3,4,5,6\r\n1,2,3,4,5,6\r\n38";
-    setSystemInput(playerInput, gameInput);
+    GameInput gameInput = getGameInput("-1,2,3,4,5,6\r\n1,2,3,4,5,6\r\n38");
 
     //when
     gameInput.inputWinningLotto();
@@ -84,9 +80,7 @@ class GameInputTest {
   @Test
   void inputWinningLottoThreeTimes() {
     //given
-    GameInput gameInput = new GameInput();
-    String playerInput = "1,2,3\r\na,b,c,d,e,f\r\n1,2,3,4,5,6\r\n38";
-    setSystemInput(playerInput, gameInput);
+    GameInput gameInput = getGameInput("1,2,3\r\na,b,c,d,e,f\r\n1,2,3,4,5,6\r\n38");
 
     //when
     gameInput.inputWinningLotto();
@@ -99,9 +93,7 @@ class GameInputTest {
   @Test
   void getPlayerInputNumbers() {
     //given
-    GameInput gameInput = new GameInput();
-    String playerInput = "1,2,3,4,5,6";
-    setSystemInput(playerInput, gameInput);
+    GameInput gameInput = getGameInput("1,2,3,4,5,6");
 
     //when
     Integer[] result = gameInput.getPlayerInputNumbers();
