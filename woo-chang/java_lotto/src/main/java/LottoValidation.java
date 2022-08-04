@@ -27,16 +27,16 @@ public class LottoValidation {
   public static PurchaseValidationResult validatePurchaseAboutLargeNumber(String purchase) {
     if (purchase.length() > LottoGuide.PURCHASE_RANGE_LIMIT.getValue()
         || new BigInteger(purchase).compareTo(BigInteger.valueOf(Long.MAX_VALUE)) > 0) {
-      LottoOutput.print(PurchaseValidationResult.LARGE.getErrorMessage());
-      return PurchaseValidationResult.LARGE;
+      LottoOutput.print(PurchaseValidationResult.MUCH.getErrorMessage());
+      return PurchaseValidationResult.MUCH;
     }
     return PurchaseValidationResult.SUCCESS;
   }
 
   public static PurchaseValidationResult validatePurchaseAboutMinimum(String purchase) {
     if (Integer.parseInt(purchase) < LottoGuide.PURCHASE_MINIMUM.getValue()) {
-      LottoOutput.print(PurchaseValidationResult.SMALL.getErrorMessage());
-      return PurchaseValidationResult.SMALL;
+      LottoOutput.print(PurchaseValidationResult.LACK.getErrorMessage());
+      return PurchaseValidationResult.LACK;
     }
     return PurchaseValidationResult.SUCCESS;
   }

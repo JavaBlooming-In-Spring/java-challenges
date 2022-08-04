@@ -44,7 +44,7 @@ public class LottoValidationTest {
     PurchaseValidationResult result = LottoValidation.validatePurchaseAboutLargeNumber(input);
 
     //then
-    assertThat(result).isEqualTo(PurchaseValidationResult.LARGE);
+    assertThat(result).isEqualTo(PurchaseValidationResult.MUCH);
   }
 
   @Test
@@ -57,7 +57,7 @@ public class LottoValidationTest {
     PurchaseValidationResult result = LottoValidation.validatePurchaseAboutMinimum(input);
 
     //then
-    assertThat(result).isEqualTo(PurchaseValidationResult.SMALL);
+    assertThat(result).isEqualTo(PurchaseValidationResult.LACK);
   }
 
   @Test
