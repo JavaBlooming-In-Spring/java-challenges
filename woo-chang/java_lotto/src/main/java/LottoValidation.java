@@ -25,8 +25,7 @@ public class LottoValidation {
   }
 
   public static PurchaseValidationResult validatePurchaseAboutLargeNumber(String purchase) {
-    if (purchase.length() > LottoGuide.PURCHASE_RANGE_LIMIT.getValue()
-        || new BigInteger(purchase).compareTo(BigInteger.valueOf(Long.MAX_VALUE)) > 0) {
+    if (new BigInteger(purchase).compareTo(BigInteger.valueOf(Long.MAX_VALUE)) > 0) {
       LottoOutput.print(PurchaseValidationResult.MUCH.getErrorMessage());
       return PurchaseValidationResult.MUCH;
     }

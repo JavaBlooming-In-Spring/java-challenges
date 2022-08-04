@@ -4,8 +4,7 @@ public enum LottoGuide {
   COUNT(6),
   LOW_NUM(1),
   HIGH_NUM(45),
-  PURCHASE_MINIMUM(1000),
-  PURCHASE_RANGE_LIMIT(19);
+  PURCHASE_MINIMUM(1000);
 
   private final int value;
 
