@@ -1,4 +1,6 @@
+import domain.ValidateResult;
 import domain.util.LottoGuide;
+import domain.util.LottoMessage;
 import domain.util.LottoValidationResult;
 import domain.util.PurchaseValidationResult;
 import java.math.BigInteger;
@@ -7,6 +9,47 @@ import java.util.List;
 import java.util.Set;
 
 public class LottoValidation {
+
+  public static PurchaseValidationResult validatePurchase(ValidateResult validateResult) {
+    LottoOutput.print(LottoMessage.PURCHASE_INPUT.getMessage());
+    String input = LottoInput.getInput();
+    if (LottoValidation.validatePurchaseAboutString(input) != PurchaseValidationResult.SUCCESS
+        || LottoValidation.validatePurchaseAboutNegative(input) != PurchaseValidationResult.SUCCESS
+        || LottoValidation.validatePurchaseAboutLargeNumber(input)
+        != PurchaseValidationResult.SUCCESS
+        || LottoValidation.validatePurchaseAboutMinimum(input)
+        != PurchaseValidationResult.SUCCESS) {
+      return PurchaseValidationResult.FAIL;
+    }
+    validateResult.successPurchaseAmount(Long.parseLong(input));
+    return PurchaseValidationResult.SUCCESS;
+  }
+
+  public static LottoValidationResult validateLastWeekLotto(ValidateResult validateResult) {
+    LottoOutput.print(LottoMessage.LAST_WEEK_WINNING_NUMBER.getMessage());
+    String input = LottoInput.getInput();
+    if (LottoValidation.validateLottoString(input) != LottoValidationResult.SUCCESS
+        || LottoValidation.validateLottoCount(input) != LottoValidationResult.SUCCESS
+        || LottoValidation.validateLottoNumbersRange(input) != LottoValidationResult.SUCCESS
+        || LottoValidation.validateLottoDuplication(input) != LottoValidationResult.SUCCESS) {
+      return LottoValidationResult.FAIL;
+    }
+    validateResult.successLastWeekLotto(LottoGenerator.loadingLastWeekLotto(input));
+    return LottoValidationResult.SUCCESS;
+  }
+
+  public static LottoValidationResult validateBonus(ValidateResult validateResult) {
+    LottoOutput.print(LottoMessage.BONUS_BALL.getMessage());
+    String input = LottoInput.getInput();
+    if (LottoValidation.validateBonusString(input) != LottoValidationResult.SUCCESS
+        || LottoValidation.validateBonusRange(input) != LottoValidationResult.SUCCESS
+        || LottoValidation.validateBonusDuplication(input,
+        validateResult.getValidLastWeekLotto().getNumbers()) != LottoValidationResult.SUCCESS) {
+      return LottoValidationResult.FAIL;
+    }
+    validateResult.successBonus(Integer.parseInt(input));
+    return LottoValidationResult.SUCCESS;
+  }
 
   public static PurchaseValidationResult validatePurchaseAboutString(String purchase) {
     if (purchase.matches("[^-](.*)\\D(.*)")) {
@@ -90,7 +133,8 @@ public class LottoValidation {
     return LottoValidationResult.SUCCESS;
   }
 
-  public static LottoValidationResult validateBonusDuplication(String bonus, List<Integer> lottoNumbers) {
+  public static LottoValidationResult validateBonusDuplication(String bonus,
+      List<Integer> lottoNumbers) {
     Integer bonusNumber = Integer.parseInt(bonus);
     if (lottoNumbers.contains(bonusNumber)) {
       LottoOutput.print(LottoValidationResult.BONUS_DUPLICATE.getErrorMessage());

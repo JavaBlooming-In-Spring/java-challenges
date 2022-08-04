@@ -1,4 +1,5 @@
 import domain.Lotto;
+import domain.ValidateResult;
 import domain.WinningLotto;
 import domain.util.LottoGuide;
 import domain.util.LottoMessage;
@@ -12,10 +13,8 @@ import java.util.Map.Entry;
 
 public class LottoGame {
 
-  private Long purchaseAmount;
+  private final ValidateResult validateResult = new ValidateResult();
   private List<Lotto> lottos;
-  private Lotto lastWeekLotto;
-  private int bonus;
   private WinningLotto winningLotto;
   private final Map<Rank, Long> result = new HashMap<>();
 
@@ -23,13 +22,15 @@ public class LottoGame {
     purchaseLottos();
     loadingLastWeekLotto();
     loadingBonus();
-    winningLotto = new WinningLotto(lastWeekLotto, bonus);
+    winningLotto = new WinningLotto(validateResult.getValidLastWeekLotto(),
+        validateResult.getValidBonus());
   }
 
   private void purchaseLottos() {
-    while (validatePurchase() == PurchaseValidationResult.FAIL)
+    while (LottoValidation.validatePurchase(validateResult) == PurchaseValidationResult.FAIL)
       ;
-    long purchaseNumber = purchaseAmount / LottoGuide.PURCHASE_MINIMUM.getValue();
+    long purchaseNumber =
+        validateResult.getValidPurchaseAmount() / LottoGuide.PURCHASE_MINIMUM.getValue();
     lottos = LottoGenerator.generateLottos(purchaseNumber);
     LottoOutput.print(purchaseNumber + "개를 구매했습니다.");
     for (int i = 0; i < purchaseNumber; i++) {
@@ -37,52 +38,14 @@ public class LottoGame {
     }
   }
 
-  private PurchaseValidationResult validatePurchase() {
-    LottoOutput.print(LottoMessage.PURCHASE_INPUT.getMessage());
-    String input = LottoInput.getInput();
-    if (LottoValidation.validatePurchaseAboutString(input) != PurchaseValidationResult.SUCCESS
-        || LottoValidation.validatePurchaseAboutNegative(input) != PurchaseValidationResult.SUCCESS
-        || LottoValidation.validatePurchaseAboutLargeNumber(input) != PurchaseValidationResult.SUCCESS
-        || LottoValidation.validatePurchaseAboutMinimum(input) != PurchaseValidationResult.SUCCESS) {
-      return PurchaseValidationResult.FAIL;
-    }
-    purchaseAmount = Long.parseLong(input);
-    return PurchaseValidationResult.SUCCESS;
-  }
-
   private void loadingLastWeekLotto() {
-    while (validateLastWeekLotto() == LottoValidationResult.FAIL)
+    while (LottoValidation.validateLastWeekLotto(validateResult) == LottoValidationResult.FAIL)
       ;
-  }
-
-  private LottoValidationResult validateLastWeekLotto() {
-    LottoOutput.print(LottoMessage.LAST_WEEK_WINNING_NUMBER.getMessage());
-    String input = LottoInput.getInput();
-    if (LottoValidation.validateLottoString(input) != LottoValidationResult.SUCCESS
-        || LottoValidation.validateLottoCount(input) != LottoValidationResult.SUCCESS
-        || LottoValidation.validateLottoNumbersRange(input) != LottoValidationResult.SUCCESS
-        || LottoValidation.validateLottoDuplication(input) != LottoValidationResult.SUCCESS) {
-      return LottoValidationResult.FAIL;
-    }
-    lastWeekLotto = LottoGenerator.loadingLastWeekLotto(input);
-    return LottoValidationResult.SUCCESS;
   }
 
   private void loadingBonus() {
-    while (validateBonus() == LottoValidationResult.FAIL)
+    while (LottoValidation.validateBonus(validateResult) == LottoValidationResult.FAIL)
       ;
-  }
-
-  private LottoValidationResult validateBonus() {
-    LottoOutput.print(LottoMessage.BONUS_BALL.getMessage());
-    String input = LottoInput.getInput();
-    if (LottoValidation.validateBonusString(input) != LottoValidationResult.SUCCESS
-        || LottoValidation.validateBonusRange(input) != LottoValidationResult.SUCCESS
-        || LottoValidation.validateBonusDuplication(input, lastWeekLotto.getNumbers()) != LottoValidationResult.SUCCESS) {
-      return LottoValidationResult.FAIL;
-    }
-    bonus = Integer.parseInt(input);
-    return LottoValidationResult.SUCCESS;
   }
 
   public void end() {
@@ -108,7 +71,7 @@ public class LottoGame {
     for (Entry<Rank, Long> entry : result.entrySet()) {
       total += entry.getKey().getPrice() * entry.getValue();
     }
-    return String.format("%.3f", (double) total / purchaseAmount);
+    return String.format("%.3f", (double) total / validateResult.getValidPurchaseAmount());
   }
 
 }
