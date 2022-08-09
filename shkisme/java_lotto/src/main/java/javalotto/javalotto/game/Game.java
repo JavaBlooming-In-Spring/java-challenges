@@ -17,6 +17,7 @@ import java.util.Collections;
 import javalotto.javalotto.Error;
 import javalotto.javalotto.Rank;
 import javalotto.javalotto.User;
+import javalotto.javalotto.lotto.SaveLotto;
 import javalotto.javalotto.lotto.WinningLotto;
 import javalotto.javalotto.lotto.Lotto;
 import javalotto.javalotto.lotto.LottoGenerator;
@@ -28,7 +29,7 @@ public class Game {
   private final GamePrint gamePrint = new GamePrint(user);
   public WinningLotto winningLotto;
   private Lotto lastWeekWinningLotto;
-  private int laswWeekBonusBall;
+  private int lastWeekBonusBall;
 
   public void input() { // 사용자에게 input 받음
     while (purchaseLotto() == ERROR)
@@ -60,8 +61,8 @@ public class Game {
 
   private void generateLotto(int lottoTicket) {
     for (int i = 0; i < lottoTicket; i++) {
-      LottoGenerator lotto = new LottoGenerator(user);
-      lotto.lottoGenerator();
+      LottoGenerator lottoGenerator = LottoGenerator.newLottoGenerator();
+      SaveLotto saveLotto = SaveLotto.saveUserLotto(user, lottoGenerator.generateLotto());
     }
   }
 
