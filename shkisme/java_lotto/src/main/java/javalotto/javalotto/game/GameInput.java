@@ -35,8 +35,8 @@ public class GameInput {
     long amount = 0L;
     try {
       amount = scanner.nextLong();
-    } catch (Exception e) {
-      e = new Exception(AMOUNT_OUT_OF_RANGE.getMessage());
+    } catch (InputMismatchException inputMismatchException) {
+      Exception e = new Exception(AMOUNT_OUT_OF_RANGE.getMessage());
       scanner = new Scanner(System.in);
       throw e;
     }
