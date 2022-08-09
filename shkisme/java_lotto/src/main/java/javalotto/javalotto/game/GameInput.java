@@ -8,7 +8,7 @@ import static javalotto.javalotto.ErrorMessage.CANNOT_NEGATIVE;
 import static javalotto.javalotto.ErrorMessage.DUPLICATED_WITH_WINNING_LOTTO;
 import static javalotto.javalotto.ErrorMessage.INPUT_TEXT_TO_BONUS_BALL;
 import static javalotto.javalotto.ErrorMessage.INPUT_TEXT_TO_LOTTO;
-import static javalotto.javalotto.ErrorMessage.LACK_MONNEY;
+import static javalotto.javalotto.ErrorMessage.LACK_MONEY;
 import static javalotto.javalotto.ErrorMessage.AMOUNT_OUT_OF_RANGE;
 import static javalotto.javalotto.ErrorMessage.LOTTO_OUT_OF_RANGE;
 import static javalotto.javalotto.ErrorMessage.NOT_SIX_NUMBERS;
@@ -66,7 +66,7 @@ public class GameInput {
 
   private void amountValueCheck(long amount) throws Exception {
     if (0 < amount && amount < ONE_LOTTO_PRICE) {
-      Exception e = new Exception(LACK_MONNEY.getMessage());
+      Exception e = new Exception(LACK_MONEY.getMessage());
       throw e;
     }
   }
@@ -74,11 +74,11 @@ public class GameInput {
   public Lotto winningLotto() throws Exception {
     String winningLottoNumber = scanner.next();
     try {
-      winningLottoErrorCheck(extrackNumbers(winningLottoNumber));
+      winningLottoErrorCheck(extractNumbers(winningLottoNumber));
     } catch (Exception e) {
       throw e;
     }
-    Lotto winningLotto = getWinningLotto(extrackNumbers(winningLottoNumber));
+    Lotto winningLotto = getWinningLotto(extractNumbers(winningLottoNumber));
     return winningLotto;
   }
 
@@ -90,7 +90,7 @@ public class GameInput {
     return new Lotto(winningLotto);
   }
 
-  private String[] extrackNumbers(String winningLottoNumber) {
+  private String[] extractNumbers(String winningLottoNumber) {
     String[] lottoNumbers = winningLottoNumber.split(",");
     return lottoNumbers;
   }
