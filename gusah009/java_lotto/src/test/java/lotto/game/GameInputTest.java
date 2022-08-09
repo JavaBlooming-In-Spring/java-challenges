@@ -1,6 +1,7 @@
 package lotto.game;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
@@ -100,6 +101,13 @@ class GameInputTest {
 
     //then
     assertThat(result).containsAll(List.of(1, 2, 3, 4, 5, 6));
+  }
+
+  @Test
+  void getPlayerInputNumbersFailedByNotNumeric() {
+    GameInput gameInput = getGameInput("1,2,a,4,b,6");
+
+    assertThrows(NumberFormatException.class, gameInput::getPlayerInputNumbers);
   }
 
   private void setSystemInput(String data, GameInput gameInput) {
