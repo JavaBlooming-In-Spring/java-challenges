@@ -1,6 +1,5 @@
 package lotto.service;
 
-import static lotto.domain.Rank.RANKLIST;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;

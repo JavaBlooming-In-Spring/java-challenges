@@ -25,7 +25,7 @@ public class WinningLottoTest {
     // when
     Optional<Rank> rank = winningLotto.match(userLotto);
     // then
-    Assertions.assertThat(rank).isEqualTo(FIRST);
+    Assertions.assertThat(rank).isEqualTo(Optional.of(FIRST));
   }
 
   @Test
@@ -36,7 +36,7 @@ public class WinningLottoTest {
     // when
     Optional<Rank> rank = winningLotto.match(userLotto);
     // then
-    Assertions.assertThat(rank).isEqualTo(SECOND);
+    Assertions.assertThat(rank).isEqualTo(Optional.of(SECOND));
   }
 
   @Test
@@ -47,7 +47,7 @@ public class WinningLottoTest {
     // when
     Optional<Rank> rank = winningLotto.match(userLotto);
     // then
-    Assertions.assertThat(rank).isEqualTo(THIRD);
+    Assertions.assertThat(rank).isEqualTo(Optional.of(THIRD));
   }
 
   @Test
@@ -58,7 +58,7 @@ public class WinningLottoTest {
     // when
     Optional<Rank> rank = winningLotto.match(userLotto);
     // then
-    Assertions.assertThat(rank).isEqualTo(FORTH);
+    Assertions.assertThat(rank).isEqualTo(Optional.of(FORTH));
   }
 
   @Test
@@ -69,7 +69,7 @@ public class WinningLottoTest {
     // when
     Optional<Rank> rank = winningLotto.match(userLotto);
     // then
-    Assertions.assertThat(rank).isEqualTo(FIFTH);
+    Assertions.assertThat(rank).isEqualTo(Optional.of(FIFTH));
   }
 
   @Test
@@ -80,6 +80,6 @@ public class WinningLottoTest {
     // when
     Optional<Rank> rank = winningLotto.match(userLotto);
     // then
-    Assertions.assertThat(rank).isNull();
+    Assertions.assertThat(rank).isEqualTo(Optional.empty());
   }
 }

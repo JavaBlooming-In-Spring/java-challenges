@@ -5,15 +5,17 @@ import static lotto.domain.Rank.FIRST;
 import static lotto.domain.Rank.FORTH;
 import static lotto.domain.Rank.SECOND;
 import static lotto.domain.Rank.THIRD;
-import static lotto.domain.Rank.getRank;
+import static lotto.repository.RankRepository.getRank;
+import static lotto.repository.RankRepository.getRankRepository;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Optional;
+import lotto.repository.RankRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class RankTest {
-
+private final RankRepository rankRepository = getRankRepository();
   @Test
   @DisplayName("1등 반환")
   void rankTest() {
@@ -23,7 +25,7 @@ public class RankTest {
     // when
     Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
-    assertThat(rank).isEqualTo(FIRST);
+    assertThat(rank).isEqualTo(Optional.of(FIRST));
   }
 
   @Test
@@ -35,7 +37,7 @@ public class RankTest {
     // when
     Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
-    assertThat(rank).isEqualTo(SECOND);
+    assertThat(rank).isEqualTo(Optional.of(SECOND));
   }
 
   @Test
@@ -47,7 +49,7 @@ public class RankTest {
     // when
     Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
-    assertThat(rank).isEqualTo(THIRD);
+    assertThat(rank).isEqualTo(Optional.of(THIRD));
   }
 
   @Test
@@ -59,7 +61,7 @@ public class RankTest {
     // when
     Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
-    assertThat(rank).isEqualTo(FORTH);
+    assertThat(rank).isEqualTo(Optional.of(FORTH));
   }
 
   @Test
@@ -71,7 +73,7 @@ public class RankTest {
     // when
     Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
-    assertThat(rank).isEqualTo(FIFTH);
+    assertThat(rank).isEqualTo(Optional.of(FIFTH));
   }
 
   @Test
@@ -83,6 +85,6 @@ public class RankTest {
     // when
     Optional<Rank> rank = getRank(numberOfMatched, hasBonus);
     // then
-    assertThat(rank).isNull();
+    assertThat(rank).isEqualTo(Optional.empty());
   }
 }

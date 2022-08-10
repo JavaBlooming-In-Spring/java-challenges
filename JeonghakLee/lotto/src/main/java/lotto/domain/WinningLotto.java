@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import static lotto.domain.Rank.getRank;
+import static lotto.repository.RankRepository.getRank;
 
 import java.util.ArrayList;
 import java.util.List;

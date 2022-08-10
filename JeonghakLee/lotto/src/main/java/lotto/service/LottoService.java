@@ -1,7 +1,7 @@
 package lotto.service;
 
 import static lotto.domain.Lotto.newInstance;
-import static lotto.domain.Rank.RANKLIST;
+import static lotto.repository.RankRepository.RANKLIST;
 import static lotto.service.PrintService.printNumberOfPurchasedLotto;
 import static lotto.service.PrintService.printWinningStatistics;
 import static lotto.service.PrintService.printYield;
@@ -20,7 +20,7 @@ public class LottoService {
 
   private final InputService inputService = new InputService();
   private final List<Lotto> purchasedLotto = new ArrayList<>();
-  private final Map<Optional<Rank>, Integer> winningStatistics = new HashMap<java.util.Optional<Rank>, Integer>() {{
+  private final Map<Optional<Rank>, Integer> winningStatistics = new HashMap<>() {{
     for (Rank rank : RANKLIST) {
       put(Optional.ofNullable(rank), 0);
     }
@@ -66,7 +66,7 @@ public class LottoService {
   private double calculateYield(long purchasePrice) {
     long sum = 0;
     for (Rank rank : RANKLIST) {
-      int count = winningStatistics.get(rank);
+      int count = winningStatistics.get(Optional.of(rank));
       sum += (long) count * rank.getWinningPrice();
     }
     return Math.round((sum / (double) purchasePrice) * LOTTO_PRICE) / (double)LOTTO_PRICE;

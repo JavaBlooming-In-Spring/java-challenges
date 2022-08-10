@@ -1,6 +1,6 @@
 package lotto.service;
 
-import static lotto.domain.Rank.RANKLIST;
+import static lotto.repository.RankRepository.RANKLIST;
 
 import java.util.Map;
 import java.util.Optional;
@@ -24,7 +24,7 @@ public class PrintService {
   public static void printWinningStatistics(Map<Optional<Rank>, Integer> winningStatistics) {
     printWiningStatisticsMessage();
     for (Rank rank : RANKLIST) {
-      int count = winningStatistics.get(rank);
+      int count = winningStatistics.get(Optional.of(rank));
       printEachWiningStatistics(rank.getMatchedNumbers(), rank.getWinningPrice(), count);
     }
   }

@@ -1,5 +1,6 @@
 package lotto.service;
 
+import static lotto.service.ValidateService.Validation.INVALID;
 import static org.assertj.core.api.Assertions.*;
 
 import java.io.ByteArrayInputStream;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import lotto.service.ValidateService.Validation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,9 +33,9 @@ class InputServiceTest {
     // given
     setUserInput("-200");
     // when
-    boolean result = inputService.trySetValidMoney();
+    Validation result = inputService.trySetValidMoney();
     // then
-    assertThat(result).isFalse();
+    assertThat(result).isEqualTo(INVALID);
   }
 
   @Test
@@ -44,9 +46,9 @@ class InputServiceTest {
     inputService.scanner = new Scanner(inputStream);
     System.setIn(inputStream);
     // when
-    boolean result = inputService.trySetValidMoney();
+    Validation result = inputService.trySetValidMoney();
     // then
-    assertThat(result).isFalse();
+    assertThat(result).isEqualTo(INVALID);
   }
 
   @Test
@@ -66,9 +68,9 @@ class InputServiceTest {
     // given
     setUserInput("1,7,11,16,21,34,45");
     // when
-    boolean result = inputService.trySetWinningLottoNumbers();
+    Validation result = inputService.trySetWinningLottoNumbers();
     // then
-    assertThat(result).isFalse();
+    assertThat(result).isEqualTo(INVALID);
   }
 
   @Test
@@ -77,9 +79,9 @@ class InputServiceTest {
     // given
     setUserInput("1,7,11,16");
     // when
-    boolean result = inputService.trySetWinningLottoNumbers();
+    Validation result = inputService.trySetWinningLottoNumbers();
     // then
-    assertThat(result).isFalse();
+    assertThat(result).isEqualTo(INVALID);
   }
 
   @Test
@@ -88,9 +90,9 @@ class InputServiceTest {
     // given
     setUserInput("1,7,7,11,16,45");
     // when
-    boolean result = inputService.trySetWinningLottoNumbers();
+    Validation result = inputService.trySetWinningLottoNumbers();
     // then
-    assertThat(result).isFalse();
+    assertThat(result).isEqualTo(INVALID);
   }
 
   @Test
@@ -99,9 +101,9 @@ class InputServiceTest {
     // given
     setUserInput("66,7,11,16,45,22");
     // when
-    boolean result = inputService.trySetWinningLottoNumbers();
+    Validation result = inputService.trySetWinningLottoNumbers();
     // then
-    assertThat(result).isFalse();
+    assertThat(result).isEqualTo(INVALID);
   }
 
   @Test
@@ -125,9 +127,9 @@ class InputServiceTest {
     System.setIn(inputStream);
     List<Integer> winningLottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     // when
-    boolean result = inputService.trySetBonusBall(winningLottoNumbers);
+    Validation result = inputService.trySetBonusBall(winningLottoNumbers);
     // then
-    assertThat(result).isFalse();
+    assertThat(result).isEqualTo(INVALID);
   }
 
   @Test
@@ -137,9 +139,9 @@ class InputServiceTest {
     setUserInput("6");
     List<Integer> winningLottoNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     // when
-    boolean result = inputService.trySetBonusBall(winningLottoNumbers);
+    Validation result = inputService.trySetBonusBall(winningLottoNumbers);
     // then
-    assertThat(result).isFalse();
+    assertThat(result).isEqualTo(INVALID);
   }
 
   private void setUserInput(String input) {

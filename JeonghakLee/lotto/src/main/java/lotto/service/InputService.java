@@ -2,8 +2,8 @@ package lotto.service;
 
 import static lotto.service.PrintService.printInputMoneyRequest;
 import static lotto.service.PrintService.printMessage;
-import static lotto.service.ValidateService.Valid.INVALID;
-import static lotto.service.ValidateService.Valid.VALID;
+import static lotto.service.ValidateService.Validation.INVALID;
+import static lotto.service.ValidateService.Validation.VALID;
 import static lotto.service.ValidateService.checkValidBonusNumber;
 import static lotto.service.ValidateService.checkValidLottoNumbers;
 import static lotto.service.ValidateService.checkValidMoney;
@@ -11,7 +11,7 @@ import static lotto.service.ValidateService.checkValidMoney;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import lotto.service.ValidateService.Valid;
+import lotto.service.ValidateService.Validation;
 
 public class InputService {
 
@@ -58,7 +58,7 @@ public class InputService {
       ;
   }
 
-  Valid trySetValidMoney() {
+  Validation trySetValidMoney() {
     try {
       long input = getInputMoney();
       checkValidMoney(input);
@@ -80,7 +80,7 @@ public class InputService {
     this.money = money;
   }
 
-  Valid trySetBonusBall(List<Integer> winningLottoNumbers) {
+  Validation trySetBonusBall(List<Integer> winningLottoNumbers) {
     try {
       int input = getInputBonusBall();
       checkValidBonusNumber(winningLottoNumbers, input);
@@ -101,7 +101,7 @@ public class InputService {
     this.bonusBall = bonusBall;
   }
 
-  Valid trySetWinningLottoNumbers() {
+  Validation trySetWinningLottoNumbers() {
     try {
       String input = inputLottoNumbers();
       List<Integer> lottoNumbers = castToList(input);
