@@ -1,5 +1,12 @@
 package lotto.service;
 
+import static lotto.service.PrintService.Error.DUPLICATE_BONUS_NUMBER;
+import static lotto.service.PrintService.Error.DUPLICATE_LOTTO_NUMBER;
+import static lotto.service.PrintService.Error.INVALID_BONUS_RANGE;
+import static lotto.service.PrintService.Error.INVALID_LOTTO_LENGTH;
+import static lotto.service.PrintService.Error.INVALID_LOTTO_RANGE;
+import static lotto.service.PrintService.Error.NEGATIVE_MONEY;
+import static lotto.service.PrintService.Error.NOT_ENOUGH_MONEY;
 import static lotto.util.LottoUtil.LENGTH_OF_LOTTO_NUMBERS;
 import static lotto.util.LottoUtil.LOTTO_PRICE;
 import static lotto.util.LottoUtil.MAX_LOTTO_NUMBER;
@@ -21,13 +28,13 @@ public class ValidateService {
 
   static void checkNegative(Long input) {
     if (input < 0) {
-      throw new IllegalArgumentException("돈은 음수가 될 수 없습니다.");
+      throw new IllegalArgumentException(NEGATIVE_MONEY.getMsg());
     }
   }
 
   static void checkEnoughMoney(long input) {
     if (input < LOTTO_PRICE) {
-      throw new IllegalArgumentException("구매할 돈이 부족이 부족합니다.");
+      throw new IllegalArgumentException(NOT_ENOUGH_MONEY.getMsg());
     }
   }
 
@@ -39,14 +46,14 @@ public class ValidateService {
 
   static void checkValidLottoNumbersLength(List<Integer> lottoNumbers) {
     if (lottoNumbers.size() != LENGTH_OF_LOTTO_NUMBERS) {
-      throw new IllegalArgumentException("로또는 6개의 숫자가 필요합니다.");
+      throw new IllegalArgumentException(INVALID_LOTTO_LENGTH.getMsg());
     }
   }
 
   static void checkHasDuplicateNumbers(List<Integer> lottoNumbers) {
     Set<Integer> numberSet = new HashSet<>(lottoNumbers);
     if (lottoNumbers.size() != numberSet.size()) {
-      throw new IllegalArgumentException("로또 숫자는 서로 중복될 수 없습니다.");
+      throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER.getMsg());
     }
   }
 
@@ -58,7 +65,7 @@ public class ValidateService {
 
   static void checkValidEachNumberRange(int number) {
     if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-      throw new IllegalArgumentException("로또 숫자 범위는 1~45입니다.");
+      throw new IllegalArgumentException(INVALID_LOTTO_RANGE.getMsg());
     }
   }
 
@@ -70,13 +77,13 @@ public class ValidateService {
   static void checkWinningLottoNumbersContainBonusNumber(List<Integer> winningLottoNumbers,
       int bonusNumber) {
     if (winningLottoNumbers.contains(bonusNumber)) {
-      throw new IllegalArgumentException("보너스볼은 당첨 로또 번호 6개 숫자와 중복될 수 없습니다.");
+      throw new IllegalArgumentException(DUPLICATE_BONUS_NUMBER.getMsg());
     }
   }
 
   static void checkValidBonusNumberRange(int bonusNumber) {
     if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
-      throw new IllegalArgumentException("로또 숫자 범위가 아닙니다.");
+      throw new IllegalArgumentException(INVALID_BONUS_RANGE.getMsg());
     }
   }
 }

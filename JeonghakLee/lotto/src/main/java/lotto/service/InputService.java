@@ -1,9 +1,13 @@
 package lotto.service;
 
-import static lotto.service.PrintService.printInputMoneyRequest;
-import static lotto.service.PrintService.printMessage;
+import static lotto.service.PrintService.Error.INVALID_INT_FORMAT;
+import static lotto.service.PrintService.Error.INVALID_LONG_FORMAT;
+import static lotto.service.PrintService.Guide.REQUEST_BONUS_NUMBER;
+import static lotto.service.PrintService.Guide.REQUEST_PURCHASE_MONEY;
+import static lotto.service.PrintService.Guide.REQUEST_WINNING_LOTTO_NUMBERS;
 import static lotto.service.ValidateService.Validation.INVALID;
 import static lotto.service.ValidateService.Validation.VALID;
+import static lotto.service.PrintService.printMessage;
 import static lotto.service.ValidateService.checkValidBonusNumber;
 import static lotto.service.ValidateService.checkValidLottoNumbers;
 import static lotto.service.ValidateService.checkValidMoney;
@@ -43,7 +47,7 @@ public class InputService {
   }
 
   void inputMoney() {
-    printInputMoneyRequest();
+    printMessage(REQUEST_PURCHASE_MONEY);
     while (trySetValidMoney() == INVALID)
       ;
   }
@@ -65,7 +69,7 @@ public class InputService {
       setMoney(input);
       return VALID;
     } catch (NumberFormatException e) {
-      printMessage("64비트 정수입력 범위를 벗어났습니다.");
+      printMessage(INVALID_LONG_FORMAT);
     } catch (Exception e) {
       printMessage(e.getMessage());
     }
@@ -93,7 +97,7 @@ public class InputService {
   }
 
   private int getInputBonusBall() {
-    printMessage("보너스 볼을 입력해 주세요");
+    printMessage(REQUEST_BONUS_NUMBER);
     return Integer.parseInt(scanner.nextLine());
   }
 
@@ -109,7 +113,7 @@ public class InputService {
       setWinningLottoNumbers(lottoNumbers);
       return VALID;
     } catch (NumberFormatException e) {
-      printMessage("32비트 정수입력 범위를 벗어났습니다.");
+      printMessage(INVALID_INT_FORMAT);
     } catch (Exception e) {
       printMessage(e.getMessage());
     }
@@ -123,7 +127,7 @@ public class InputService {
   }
 
   private String inputLottoNumbers() {
-    printMessage("지난 주 당첨 번호를 입력해 주세요");
+    printMessage(REQUEST_WINNING_LOTTO_NUMBERS);
     return scanner.nextLine();
   }
 
