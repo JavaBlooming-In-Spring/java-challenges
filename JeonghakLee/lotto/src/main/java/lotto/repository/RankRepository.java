@@ -19,6 +19,7 @@ public class RankRepository {
       .collect(groupingBy(Rank::getMatchedNumbers));
   public static final List<Rank> RANKLIST = new ArrayList<>(
       Arrays.asList(Rank.values()));
+
   private void rankRepository() {
 
   }
@@ -33,15 +34,15 @@ public class RankRepository {
     }
     List<Rank> rank = rankMap.get(matchedNumbers);
     if (rank.size() == 1) {
-      return Optional.ofNullable(rank.get(0));
+      return Optional.of(rank.get(0));
     }
-    return getRankByBonusNumber(hasBonus);
+    return Optional.of(getRankByBonusNumber(hasBonus));
   }
 
-  private static Optional<Rank> getRankByBonusNumber(boolean hasBonus) {
+  private static Rank getRankByBonusNumber(boolean hasBonus) {
     if (hasBonus) {
-      return Optional.of(SECOND);
+      return SECOND;
     }
-    return Optional.of(THIRD);
+    return THIRD;
   }
 }

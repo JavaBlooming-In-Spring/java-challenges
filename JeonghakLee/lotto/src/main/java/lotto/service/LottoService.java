@@ -20,9 +20,9 @@ public class LottoService {
 
   private final InputService inputService = new InputService();
   private final List<Lotto> purchasedLotto = new ArrayList<>();
-  private final Map<Optional<Rank>, Integer> winningStatistics = new HashMap<>() {{
+  private final Map<Rank, Integer> winningStatistics = new HashMap<>() {{
     for (Rank rank : RANKLIST) {
-      put(Optional.ofNullable(rank), 0);
+      put(rank, 0);
     }
   }};
 
@@ -57,18 +57,19 @@ public class LottoService {
   private void setWinningStatistics(WinningLotto winningLotto) {
     for (Lotto lotto : purchasedLotto) {
       Optional<Rank> rank = winningLotto.match(lotto);
-      if (rank.isPresent()) {
-        winningStatistics.put(rank, winningStatistics.get(rank) + 1);
-      }
+      rank.ifPresent(this::increaseCount);
     }
+  }
+  private void increaseCount(Rank rank) {
+    winningStatistics.put(rank, winningStatistics.get(rank) + 1);
   }
 
   private double calculateYield(long purchasePrice) {
     long sum = 0;
     for (Rank rank : RANKLIST) {
-      int count = winningStatistics.get(Optional.of(rank));
+      int count = winningStatistics.get(rank);
       sum += (long) count * rank.getWinningPrice();
     }
-    return Math.round((sum / (double) purchasePrice) * LOTTO_PRICE) / (double)LOTTO_PRICE;
+    return Math.round((sum / (double) purchasePrice) * LOTTO_PRICE) / (double) LOTTO_PRICE;
   }
 }

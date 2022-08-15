@@ -20,11 +20,11 @@ public class PrintService {
     printMessage(error.getMsg());
   }
 
-  public static void printWinningStatistics(Map<Optional<Rank>, Integer> winningStatistics) {
+  public static void printWinningStatistics(Map<Rank, Integer> winningStatistics) {
     printMessage("당첨통계");
     printMessage("---------");
     for (Rank rank : RANKLIST) {
-      int count = winningStatistics.get(Optional.of(rank));
+      int count = winningStatistics.get(rank);
       printEachWiningStatistics(rank.getMatchedNumbers(), rank.getWinningPrice(), count);
     }
   }
