@@ -198,14 +198,14 @@ public class GameInput {
   private void bonusBallDuplicateCheck(Lotto lotto, int ball) {
     lotto.getLottoNumberList().forEach(number -> {
       try {
-        isBonusBallAndNumberMatch(number, ball);
+        numberMatchError(number, ball);
       } catch (Exception e) {
         throw new RuntimeException(e);
       }
     });
   }
 
-  private void isBonusBallAndNumberMatch(int number, int ball) throws Exception {
+  private void numberMatchError(int number, int ball) throws Exception {
     if (number == ball) {
       throw new Exception(DUPLICATED_WITH_WINNING_LOTTO.getMessage());
     }
