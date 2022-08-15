@@ -14,13 +14,12 @@ import static javalotto.javalotto.lotto.LottoInformation.*;
 public class LottoGenerator {
 
   private final Random random = new Random();
-  private static LottoGenerator lottoGenerator;
+  private static LottoGenerator lottoGenerator = new LottoGenerator();
 
   public LottoGenerator() {
   }
 
-  public static LottoGenerator newLottoGenerator() {
-    lottoGenerator = new LottoGenerator();
+  public static LottoGenerator getLottoGenerator() {
     return lottoGenerator;
   }
 
