@@ -87,8 +87,6 @@ public class GameInput {
 
   private Lotto getWinningLotto(String winningLottoNumber) {
     List<Integer> winningLottoNumberList = Pattern.compile(",").splitAsStream(winningLottoNumber)
-        .collect(Collectors.toList())
-        .stream()
         .map(string -> Integer.parseInt(string))
         .collect(Collectors.toList());
     return new Lotto(winningLottoNumberList);
