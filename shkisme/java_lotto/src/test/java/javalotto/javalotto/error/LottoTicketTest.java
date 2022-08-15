@@ -39,10 +39,3 @@ public class LottoTicketTest {
     System.setIn(systemInput);
   }
 }
-
-  private void setSystemInput(String input) {
-    ByteArrayInputStream systemInput = new ByteArrayInputStream(input.getBytes());
-    GameInput.scanner = new Scanner(systemInput);
-    System.setIn(systemInput);
-  }
-}
